@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" id="css-library" href="css/styleff0b.css" media="all">
+    
+    <!-- OG -->
+    <meta property="og:title" content="KARRAR NAZIM">
+    <meta property="og:site_name" content="KARRAR NAZIM">
+    <meta property="og:url" content="thestrokes.com">
+    <meta property="og:description" content="KARRAR NAZIM">
+    <meta property="og:type" content="about">
+    <meta property="og:image" content="assets/img/fav.jpg">
+    
+    <meta name="twitter:title" content="KARRAR NAZIM">
+    <meta name="twitter:image" content="assets/img/fav.jpg">
+    
+    <title>KARRAR NAZIM</title>
+    <link rel="shortcut icon" href="assets/img/fav.png">
+    
+    <!-- Fontawesome -->
+    <script src="../kit.fontawesome.com/f55a23c83c.html" crossorigin="anonymous"></script>
+    
+    
+</head>
+
+<body>
+    
+    <!-- Loading -->
+    <div id="loading_unix" class="hidden">
+        <div id="loading_unix_content"></div>
+    </div>
+    
+    <div id="loading_overlay" class="">
+        <div class="loading-wrap">
+            <div class="loading-container">
+                <img src="assets/img/loading/karrarnazim.gif" alt="Loading">
+                <div class="start-buttons">
+                    <button onclick="enterSite()">
+                        Enter site
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Loading End -->
+    
+    <!-- Main -->
+    <main>
+        <div class="nav-bar-container">
+            <div class="nav-bar nav-left">
+                <button class="btn btn-basic is-uppercase">
+                    KARRAR NAZIM
+                </button>
+            </div>
+            <div class="nav-bar nav-right">
+                <button class="time-toggle btn btn-basic">
+                    <span id="current-time"></span>
+                </button>
+                <div class="world-time-container hidden">
+                    <button class="time-us btn btn-basic">
+                        <img src="assets/img/flags/us.png" alt=""><span id="current-us"></span>
+                    </button>
+                    <button class="time-uk btn btn-basic">
+                        <img src="assets/img/flags/uk.png" alt=""><span id="current-uk"></span>
+                    </button>
+                    <button class="time-jp btn btn-basic">
+                        <img src="assets/img/flags/jp.png" alt=""><span id="current-jp"></span>
+                    </button>
+                </div>
+                <a class="btn btn-basic nav-copyright">
+                    ©
+                </a>
+            </div>
+        </div>
+        <div class="desktop-area">
+            <nav>
+                <a data-trigger="music-window" class="win-trigger icon icon_music">
+                    <span>I Love Music</span>
+                </a>
+                
+                <a data-trigger="subscribe-window" class="win-trigger icon icon_subscribe">
+                    <span>Who am I?</span>
+                </a>
+                <a data-trigger="videos-window" class="win-trigger icon icon_video">
+                    <span>My Projects</span>
+                </a>
+                <a data-trigger="screensaver-window" class="win-trigger icon icon_screensaver">
+                    <span>Screensaver</span>
+                </a>
+            </nav>
+            <div id="videoLoop" class="video-loop anim"></div>
+        </div>
+    </main>
+    <!-- Main End -->
+    
+    <!-- Footer -->
+    <footer>
+            <div class="content" style="text-align: center;">
+                <p>
+                    Karrar Nazim 2025&copy; |
+                    All Rights Reserved.
+                </p>
+            </div>
+    </footer>
+    <!-- End Footer -->
+    
+    <!-- Copyright Window -->
+    <div class="window copyright-window hidden" id="copyrightWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRAR NAZIM / ©</h2>
+                </div>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+        </header>
+        <div class="window-content">
+            
+            <div class="copyright">
+                <div class="content">
+                    <p>
+                        Karrar Nazim 2025&copy; |
+                        All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- End Copyright Window -->
+    
+    <!-- Subscribe Window -->
+    <div class="window subscribe-window hidden" id="subscribeWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRAR NAZIM / ©</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger">
+                    <span>
+                        I Love Music
+                    </span>
+                </button>
+                
+                
+                <button data-trigger="videos-window" class="win-trigger">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger current-window ">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <div class="window-content-header">
+                    <img src="assets/img/window/world.webp" alt="World">
+                    <div class="success-message hidden">
+                    </div>
+                </div>
+                <div class="signup-container">
+                    <div class="questions-container">
+                        <div class="signup-for-answers-header">
+                            About me
+                        </div>
+                        <div class="signup-for-answers-answers">
+                            <div class="scrolling-phrase-items">
+                                <span class="scrolling-phrase-slide">Who the Hell Am I?</span>
+                                <span class="scrolling-phrase-slide">FUCK YOU</span>
+                                <span class="scrolling-phrase-slide">cool</span>
+                                <span class="scrolling-phrase-slide">What I Actually Do</span>
+                                <span class="scrolling-phrase-slide">My So-Called Projects</span>
+                                <span class="scrolling-phrase-slide">Wanna Talk?</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signup-disclaimer">
+                        
+                        <p>
+                            <b>
+                                1. Who the Hell Am I?
+                            </b>
+                        </p>
+                        <p>
+                            
+                            I'm Karar — just another dude who talks to machines better than people. I build websites because breaking the internet is apparently frowned upon. Been writing code since forever (well, since 2022, but close enough). HTML, CSS, JS, React, php — yeah, I speak all that nerdy stuff. If you're here looking for a "professional" bio full of buzzwords... you're in the wrong corner of the internet, my friend.
+                        </p>
+                        <p>
+                            <b>
+                                2. What I Actually Do (Besides Crying at 3AM Debugging)
+                            </b>
+                        </p>
+                        <p>
+                            Build Stuff from Scratch
+                            Websites, portfolios, dashboards, your aunt’s bakery page — whatever. I make pixels behave.
+                            
+                            Make Ugly Things Pretty
+                            UI design that doesn’t make your eyes bleed. You're welcome.
+                            
+                            Speed Things Up
+                            I slap the lazy out of slow websites. And yes, Google loves that.
+                            
+                            Fix Things I Probably Didn’t Break
+                            Maintenance and updates. I’ll even pretend to care.
+                        </p>
+                        <p>
+                            <b>
+                                3. My So-Called Projects
+                            </b>
+                        </p>
+                        <p>
+                            I've made some pretty cool stuff. Some of it even works.
+                            Portfolios, e-commerce sites, landing pages, random experiments at 2AM that somehow ended up on the internet. Click around if you're bored — maybe you'll find something that doesn't suck.
+                        </p>
+                        <p>
+                            <b>
+                                4. Wanna Talk? Why Though?
+                            </b>
+                        </p>
+                        <p>
+                            Got an idea? Want a website? Or just bored and stalking devs?
+                            Contact me to see what I can do.
+                        </p>
+                    </div>
+                    
+                </div>
+                <div class="social-container">
+                    <div class="social-header">
+                        Contact
+                    </div>
+                    <div class="social">
+                        <a href="https://www.instagram.com/kr_j.p" target="_blank" rel="noopener">
+                            instagram
+                        </a>
+                        <a href="https://t.me/kaarrar" target="_blank" rel="noopener">
+                            Telegram
+                        </a>
+                        
+                    </div>
+                </div>
+                
+                <div class="like-this-page-container">
+                    <img src="assets/img/window/like_this_page.webp" class="like-this-page" alt="Like this page?">
+                    <img src="assets/img/window/disco_comp.gif" alt="Mirror ball" class="mirror-ball hidden">
+                </div>
+                
+                <div class="window-footer">
+                    <div class="content">
+                        <p>
+                            Karrar Nazim 2025&copy; |
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End Subscribe Window -->
+    
+    <!-- Music Window -->
+    <div class="window music-window hidden" id="musicWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRAR NAZIM / ©</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger current-window">
+                    <span>
+                        I Love Music
+                    </span>
+                </button>
+                
+                <button data-trigger="videos-window" class="win-trigger">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <div class="window-content-header">
+                    <h2>
+                        Music
+                    </h2>
+                    <img src="assets/img/window/music/treblerotate1.gif" alt="Treble" class="treble-left">
+                    <img src="assets/img/window/music/radior.gif" alt="Small speaker" class="small-speaker-left">
+                    <img src="assets/img/window/music/speakers.gif" alt="Large speaker" class="large-speaker-left">
+                    <img src="assets/img/window/music/listen.gif" alt="Listen" class="listen">
+                    <img src="assets/img/window/music/speakers.gif" alt="Large speaker" class="large-speaker-right">
+                    <img src="assets/img/window/music/radior.gif" alt="Small speaker" class="small-speaker-right">
+                    <img src="assets/img/window/music/treblerotate1.gif" alt="Treble" class="treble-right">
+                    <img src="assets/img/window/music/elephant_ear.gif" alt="Elephant" class="elephant">
+                    <img src="assets/img/window/music/music.gif" alt="Violinist" class="violinist-left">
+                    <img src="assets/img/window/music/diablo.gif" alt="Diablo" class="diablo">
+                    <img src="assets/img/window/music/electspin.gif" alt="Electric guitar" class="electric-guitar">
+                </div>
+                
+                
+                
+                <div class="animated-cd">
+                    <img src="assets/img/window/music/cd.gif" alt="CD">
+                    <img src="assets/img/window/music/cd.gif" alt="CD">
+                    <img src="assets/img/window/music/cd.gif" alt="CD">
+                    <img src="assets/img/window/music/cd.gif" alt="CD">
+                    <img src="assets/img/window/music/cd.gif" alt="CD">
+                </div>
+                <div class="window-footer">
+                    <div class="content">
+                        <p>
+                            Karrar Nazim 2025&copy; |
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Music Window -->
+    
+    <!-- Videos Window -->
+    <div class="window videos-window hidden" id="videosWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRAR NAZIM / ©</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger">
+                    <span>
+                        I Love Music
+                    </span>
+                </button>
+                
+                <button data-trigger="videos-window" class="win-trigger current-window">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <h2>
+                    My Projects
+                </h2>
+                
+                <div class="under-construction">
+                    <img src="assets/img/window/construction.gif" alt="Construction icon">
+                    <img src="assets/img/window/construction.gif" alt="Construction icon">
+                    <img src="assets/img/window/construction.gif" alt="Construction icon">
+                </div>
+                <div class="coming-soon">
+                    <img src="assets/img/window/coming_soon.png" alt="Coming soon">
+                    
+                </div>
+                
+                <img src="assets/img/window/consbar.gif" alt="Under construction">
+                
+                <div class="window-footer">
+                    <div class="content">
+                        <p>
+                            Karrar Nazim 2025&copy; |
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screensaver Window -->
+    <div class="window screensaver-window hidden" id="screensaverWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRAR NAZIM / ©</h2>
+                </div>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <img src="assets/img/window/screensaver/image019.gif" alt="House icon" class="image019">
+                <img src="assets/img/window/screensaver/shop.gif" alt="Shop banner" class="shop">
+                <img src="assets/img/window/screensaver/cd.gif" alt="CD" class="cd">
+                <img src="assets/img/window/screensaver/sodaglobe.gif" alt="Dog in Globe" class="sodaglobe">
+                <img src="assets/img/window/screensaver/musiclargesidebanner.gif" alt="Create your own cd" class="musiclargesidebanner">
+                
+                <img src="assets/img/window/screensaver/animated-cd.gif" alt="Animated CD" class="animated-cd">
+                <img src="assets/img/window/screensaver/e-mail.gif" alt="E-mail" class="e-mail">
+                <img src="assets/img/window/screensaver/music-item13.gif" alt="E-mail" class="music-item13">
+                <img src="assets/img/window/screensaver/speakers.gif" alt="E-mail" class="speakers">
+                
+                <img src="assets/img/window/screensaver/music-mov.gif" alt="Music" class="music-mov-l">
+                <img src="assets/img/window/screensaver/cooltext416636731831278.gif" alt="Music" class="cooltext416636731831278">
+                <img src="assets/img/window/screensaver/music-mov.gif" alt="Music" class="music-mov-r">
+                <img src="assets/img/window/screensaver/musica4.gif" alt="Guitar" class="musica4">
+                
+                
+                
+                
+                <img src="assets/img/window/screensaver/boymusic3.gif" alt="Boy music" class="boymusic3">
+                <img src="assets/img/window/screensaver/cd6.gif" alt="CD" class="cd6">
+                <img src="assets/img/window/screensaver/cdspin.gif" alt="CD Spin" class="cdspin">
+                <img src="assets/img/window/screensaver/music9.gif" alt="Keyboard" class="music9">
+                <img src="assets/img/window/screensaver/dinocd.gif" alt="Dino" class="dinocd">
+                <img src="assets/img/window/screensaver/senses-listening.gif" alt="6 Senses Listen" class="senses-listening">
+                <img src="assets/img/window/screensaver/music02.gif" alt="Graph" class="music02">
+                
+                <img src="assets/img/window/screensaver/musicbanner.gif" alt="Free Music" class="musicbanner">
+                <img src="assets/img/window/screensaver/musicline19.gif" alt="Music notation" class="musicline19">
+                <img src="assets/img/window/screensaver/refbutton.gif" alt="Music banner" class="refbutton">
+                
+                
+                
+            </div>
+        </div>
+    </div>
+    <!-- End Screensaver Window -->
+    
+    <!-- Scripts -->
+    <script src="js/lib/jquery/3-6-0/jquery.min.js"></script>
+    <script src="js/lib/drag.js"></script>
+    <script src="js/lib/moment.js"></script>
+    <script src="js/lib/moment-tz.js"></script>
+    
+    <script src="js/scriptsbbdd.js"></script>
+    <script src="js/lib/bit.js"></script>
+    <script src="js/lib/tour.js"></script>
+    
+</body>
+
+</html>
