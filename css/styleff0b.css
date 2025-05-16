@@ -1130,8 +1130,8 @@ body main .desktop-area nav button.icon span {
 
 body main .desktop-area nav a.icon_music,
 body main .desktop-area nav button.icon_music {
-  top: 3%;
-  left: 2%;
+  top: 50%;
+  left: 20%;
 }
 
 body main .desktop-area nav a.icon_music::before,
@@ -1902,8 +1902,8 @@ footer .social-container {
   max-width: 54rem;
   width: 100%;
   max-height: 60vh;
-  top: 40%;
-  left: 43%;
+  top: 50%;
+  left: 50%;
 }
 
 @media (max-width: 36em) {
@@ -2136,7 +2136,7 @@ footer .social-container {
   max-width: 54rem;
   width: 100%;
   max-height: 60vh;
-  left: 70%;
+  left: 50%;
 }
 
 @media (max-width: 36em) {
@@ -2389,7 +2389,7 @@ footer .social-container {
   width: 100%;
   max-height: 60vh;
   top: 50%;
-  left: 30%;
+  left: 50%;
 }
 
 @media (max-width: 36em) {
