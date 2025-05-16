@@ -1130,8 +1130,8 @@ body main .desktop-area nav button.icon span {
 
 body main .desktop-area nav a.icon_music,
 body main .desktop-area nav button.icon_music {
-  top: 50%;
-  left: 20%;
+  top: 60rem;
+  left: 5rem;
 }
 
 body main .desktop-area nav a.icon_music::before,
@@ -1143,8 +1143,8 @@ body main .desktop-area nav button.icon_music::before {
 
   body main .desktop-area nav a.icon_music,
   body main .desktop-area nav button.icon_music {
-    top: 50%;
-    left: 10%;
+    top: 20rem;
+    left: 5rem;
   }
 }
 
@@ -1190,8 +1190,8 @@ body main .desktop-area nav button.icon_store::before {
 
 body main .desktop-area nav a.icon_subscribe,
 body main .desktop-area nav button.icon_subscribe {
-  top: 63%;
-  left: 67%;
+  top: 50rem;
+  left: 30rem;
 }
 
 body main .desktop-area nav a.icon_subscribe::before,
@@ -1203,15 +1203,15 @@ body main .desktop-area nav button.icon_subscribe::before {
 
   body main .desktop-area nav a.icon_subscribe,
   body main .desktop-area nav button.icon_subscribe {
-    top: -47%;
-    left: 77%;
+    top: 20rem;
+    left: 20rem;
   }
 }
 
 body main .desktop-area nav a.icon_video,
 body main .desktop-area nav button.icon_video {
-  top: 6%;
-  left: 52%;
+  top: 80rem;
+  left: 80rem;
 }
 
 body main .desktop-area nav a.icon_video::before,
@@ -1223,15 +1223,15 @@ body main .desktop-area nav button.icon_video::before {
 
   body main .desktop-area nav a.icon_video,
   body main .desktop-area nav button.icon_video {
-    top: -50%;
+    top: -30rem;
     left: 0%;
   }
 }
 
 body main .desktop-area nav a.icon_screensaver,
 body main .desktop-area nav button.icon_screensaver {
-  top: 9%;
-  left: 88%;
+  top: 20rem;
+  left: 60rem;
 }
 
 body main .desktop-area nav a.icon_screensaver::before,
@@ -1243,8 +1243,8 @@ body main .desktop-area nav button.icon_screensaver::before {
 
   body main .desktop-area nav a.icon_screensaver,
   body main .desktop-area nav button.icon_screensaver {
-    top: -71%;
-    left: 60%;
+    top: -40rem;
+    left: 20rem;
   }
 }
 
