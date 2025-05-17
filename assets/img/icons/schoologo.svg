@@ -1,0 +1,21 @@
+<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+  <!-- كارت خارجي -->
+  <rect x="0" y="0" width="220" height="220" 
+        fill="black" stroke="black" stroke-width="4"/>
+
+  <!-- الرأس (أكبر ومركزي أكثر) -->
+  <circle cx="110" cy="70" r="35" fill="whitesmoke"/>
+
+  <!-- الجسم (أعرض وأسفل قليلاً) -->
+  <path d="
+    M 60 120
+    Q 110 100, 160 120
+    Q 165 160, 55 160
+    Q 60 140, 60 120
+    Z
+  " fill="whitesmoke"/>
+
+  <!-- خطوط تمثل معلومات (أوسع ومتباعدة أكثر) -->
+  <line x1="30" y1="180" x2="190" y2="180" stroke="whitesmoke" stroke-width="4" stroke-linecap="round"/>
+  <line x1="30" y1="195" x2="150" y2="195" stroke="whitesmoke" stroke-width="4" stroke-linecap="round"/>
+</svg>

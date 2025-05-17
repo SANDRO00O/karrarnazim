@@ -2092,13 +2092,18 @@ footer .social-container {
 
 .window.subscribe-window .social-container .social a, .window-content-area .social-container .social a{
   padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0;
   border: 1px solid var(--bg-color);
   margin: 0;
+  
+}
+
+.window.subscribe-window .social-container .social a img, .window-content-area .social-container .social a img{
+  width: 10rem;
+  margin-top: 1rem;
+  
 }
 
 .window.subscribe-window .social-container .social a:hover, .window-content-area .social-container .social a:hover {
