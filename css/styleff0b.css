@@ -2075,7 +2075,7 @@ footer .social-container {
   }
 }
 
-.window.subscribe-window .social-container .social-header {
+.window.subscribe-window .social-container .social-header, .window-content-area .social-container .social-header {
   background-color: var(--bg-color);
   color: white;
   font-size: 1.6rem;
@@ -2084,13 +2084,13 @@ footer .social-container {
   letter-spacing: 0;
 }
 
-.window.subscribe-window .social-container .social {
+.window.subscribe-window .social-container .social, .window-content-area .social-container .social {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 1px solid var(--bg-color);
 }
 
-.window.subscribe-window .social-container .social a {
+.window.subscribe-window .social-container .social a, .window-content-area .social-container .social a{
   padding: 2rem;
   display: flex;
   justify-content: center;
@@ -2101,7 +2101,7 @@ footer .social-container {
   margin: 0;
 }
 
-.window.subscribe-window .social-container .social a:hover {
+.window.subscribe-window .social-container .social a:hover, .window-content-area .social-container .social a:hover {
   background-color: var(--bg-color);
   color: white;
 }
