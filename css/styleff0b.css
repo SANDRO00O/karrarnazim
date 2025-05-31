@@ -1652,9 +1652,12 @@ footer .social-container {
 
 .window header .title-bar .title .search-icon {
   width: 2.5rem;
+  
 }
 
 .window header .title-bar .title h2 {
+  overflow-x: hidden;
+
   color: white;
   background-color: var(--window-title-bar-color);
   font-family: var(--window-title-font);
