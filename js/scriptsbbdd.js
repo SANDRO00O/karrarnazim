@@ -166,28 +166,46 @@ var phraseCarouselInterval;
 
 // unixLoading();
 
-/*-- Play Loop --*/
-var anim = document.getElementById('videoLoop');
-
-function stopLogoAnim() {
-    setTimeout(function() {
-        $('.video-loop').removeClass("anim");
-    }, 1200);
-}
-
-function playLoop() {
-    $('.window').addClass('hidden');
-    anim.classList.add('anim');
-    stopLogoAnim();
-}
-/*-- End Play Loop --*/
 
 /*-- Enter Site --*/
+
+const text = document.getElementById("changing-text");
+const fonts2 = [
+    'DOSANK24', 'TimesNewCustom', 'DOSANK16', 'Screenstar',
+    'Tiny5', 'SixtyfourConvergence', 'PressStart2P',
+    'PixelifySans', 'VariableFont_ROND', 'CoralPixels', 'DOSANK24'
+];
+
+let isPlaying2 = false; // فلاغ للتأكد من عدم التكرار
+
+async function loadFonts() {
+    await Promise.all(fonts2.map(f => document.fonts.load(`16px "${f}"`)));
+}
+
+async function playLoop2() {
+    // تجاهل التشغيل إن كان قيد العمل
+    if (isPlaying2) return;
+    
+    isPlaying2 = true; // ابدأ التشغيل
+    await loadFonts();
+    const text = document.getElementById("changing-text");
+    
+    let i = 0;
+    const interval = setInterval(() => {
+        text.style.fontFamily = fonts2[i % fonts2.length];
+        i++;
+        if (i >= fonts2.length) {
+            clearInterval(interval);
+            isPlaying2 = false; // أعد السماح بالتشغيل بعد الانتهاء
+        }
+    }, 150);
+}
+
 function enterSite() {
     $('#loading_overlay').addClass('hidden');
-    anim.classList.add('anim');
-    stopLogoAnim();
+    playLoop2();
 }
+
 /*-- End Enter Site --*/
 
 /*-- Windows --*/
