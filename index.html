@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KARRAR NAZIM</title>
     <link rel="stylesheet" id="css-library" href="css/styleff0b.css?rev=9" media="all">
-    <meta name="description" content="أنا كرار، مطوّر ويب منذ عام 2022، قررت اقتحام هذا المجال لأن الحياة لم تُتح لي خياراً أفضل. أصنع مواقع تُشبهني: فوضوية أحياناً، عبقرية أحياناً، وغالباً ما تعمل.">
-    <!-- OG -->
+    <meta name="description" content="I'm Karar, a web developer since 2022. I chose this path because life didn’t give me a better option. I build websites that reflect me: sometimes chaotic, sometimes brilliant, and they mostly work.">
     <meta property="og:title" content="KARRAR NAZIM">
-    <meta name="og:description" content="أنا كرار، مطوّر ويب منذ عام 2022، قررت اقتحام هذا المجال لأن الحياة لم تُتح لي خياراً أفضل. أصنع مواقع تُشبهني: فوضوية أحياناً، عبقرية أحياناً، وغالباً ما تعمل.">
+    
+    <meta name="og:description" content="I'm Karar, a web developer since 2022. I chose this path because life didn’t give me a better option. I build websites that reflect me: sometimes chaotic, sometimes brilliant, and they mostly work.">
+    <!-- OG -->
     <meta property="og:url" content="https://karrarnazim.netlify.app">
     <meta property="og:description" content="KARRAR NAZIM">
     <meta property="og:type" content="about">
@@ -43,7 +44,6 @@
   text-align: left;
   font-size: 1rem;
   line-height: 1.3rem;
-  display: none;
 ">
         <div id="chaos-text">waking up the website...</div>
     </div>
@@ -305,7 +305,7 @@
                 
                 <div class="social-container">
                     <div class="social-header">
-                        Contact
+                        other Contact
                     </div>
                     <div class="social">
                         <a href="https://www.instagram.com/kr_j.p" target="_blank" rel="noopener">
@@ -553,29 +553,29 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-    emailjs.init({ publicKey: "22hFsgtwZz1baWIHr" });
-    
-    document.getElementById("contact-form").addEventListener("submit", function(e) {
-        e.preventDefault();
+    <script>
+        emailjs.init({ publicKey: "22hFsgtwZz1baWIHr" });
         
-        const captchaResponse = grecaptcha.getResponse();
-        
-        if (!captchaResponse) {
-            document.getElementById("status-message").innerText = "Make sure to check reCAPTCHA.";
-            return;
-        }
-        
-        emailjs.sendForm("service_ensplx8", "template_p18srdw", this)
-            .then(() => {
-                document.getElementById("status-message").innerText = "sent!, I will replay as soon as I can...";
-                grecaptcha.reset(); // إعادة الكابتشا
-                this.reset();
-            }, (error) => {
-                document.getElementById("status-message").innerText = "somthing went wrong!" + error.text;
-            });
-    });
-</script>
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const captchaResponse = grecaptcha.getResponse();
+            
+            if (!captchaResponse) {
+                document.getElementById("status-message").innerText = "Make sure to check reCAPTCHA.";
+                return;
+            }
+            
+            emailjs.sendForm("service_ensplx8", "template_p18srdw", this)
+                .then(() => {
+                    document.getElementById("status-message").innerText = "sent!, I will replay as soon as I can...";
+                    grecaptcha.reset(); // إعادة الكابتشا
+                    this.reset();
+                }, (error) => {
+                    document.getElementById("status-message").innerText = "somthing went wrong!" + error.text;
+                });
+        });
+    </script>
     
     
     <script>
