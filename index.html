@@ -28,7 +28,24 @@
 </head>
 
 <body>
-    
+<div id="chaos-loader" style="
+  position: fixed;
+  inset: 0;
+  background: #000;
+  color: #00ff99;
+  font-family: var(--main-font);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999999;
+  padding: 2rem;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.3rem;
+">
+  <div id="chaos-text">waking up the website...</div>
+</div>
     <!-- Loading -->
     <div id="loading_unix" class="hidden">
         <div id="loading_unix_content"></div>
@@ -499,6 +516,39 @@
     <script src="js/lib/tour.js"></script>
     <script src="js/scriptsbbdd.js?version=3"></script>
     <script>
+    const chaosText = document.getElementById('chaos-text');
+    const chaosLines = [
+        "yo... hold on, the site is still putting on pants.",
+        "still booting... probably watching cat videos.",
+        "loading the pixels... very carefully.",
+        "almost there. maybe. idk.",
+        "okay okay okay... here it comes.",
+        "alright, fine. here you go."
+    ];
+    
+    let index = 0;
+    
+    function showNextLine() {
+        if (index < chaosLines.length) {
+            chaosText.innerHTML += "<br>" + chaosLines[index];
+            index++;
+            setTimeout(showNextLine, 1000);
+        }
+    }
+    
+    window.onload = () => {
+        showNextLine();
+        setTimeout(() => {
+            const loader = document.getElementById('chaos-loader');
+            loader.style.opacity = '0';
+            loader.style.transition = 'opacity 0.8s ease';
+            setTimeout(() => {
+                loader.remove();
+            }, 1000);
+        }, chaosLines.length * 1000 + 300);
+    };
+</script>
+    <script>
         var originalTitle = document.title;
         
         document.title = "Stepping into the unknown";
@@ -572,5 +622,4 @@
         });
     </script>
 </body>
-
 </html>
