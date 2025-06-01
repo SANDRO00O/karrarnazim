@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <title>KARRAR NAZIM</title>
     <link rel="stylesheet" id="css-library" href="css/styleff0b.css?rev=8" media="all">
     <meta name="description" content="أنا كرار، مطوّر ويب منذ عام 2022، قررت اقتحام هذا المجال لأن الحياة لم تُتح لي خياراً أفضل. أصنع مواقع تُشبهني: فوضوية أحياناً، عبقرية أحياناً، وغالباً ما تعمل.">
     <!-- OG -->
@@ -14,13 +14,12 @@
     <meta property="og:url" content="https://karrarnazim.netlify.app">
     <meta property="og:description" content="KARRAR NAZIM">
     <meta property="og:type" content="about">
-    <meta property="og:image" content="assets/img/fav.jpg">
+    <meta property="og:image" content="assets/img/mainfav.png">
     
     <meta name="twitter:title" content="KARRAR NAZIM">
-    <meta name="twitter:image" content="assets/img/fav.jpg">
+    <meta name="twitter:image" content="assets/img/mainfav.png">
     
-    <title>KARRAR NAZIM</title>
-    <link rel="shortcut icon" href="assets/img/fav.png">
+    <link rel="icon" href="/assets/img/icons/fav.png">
     
     <!-- Fontawesome -->
     <script src="../kit.fontawesome.com/f55a23c83c.html" crossorigin="anonymous"></script>
@@ -96,7 +95,7 @@
                 </a>
             </nav>
             <h2 id="changing-text" class="font-loop">Welcome, unfortunately</h2>
-
+            
         </div>
         
     </main>
@@ -492,15 +491,86 @@
     <!-- End Screensaver Window -->
     
     <!-- Scripts -->
-
     <script src="js/lib/jquery/3-6-0/jquery.min.js"></script>
     <script src="js/lib/drag.js"></script>
     <script src="js/lib/moment.js"></script>
     <script src="js/lib/moment-tz.js"></script>
-    <script src="js/scriptsbbdd.js?version=3"></script>
     <script src="js/lib/bit.js"></script>
     <script src="js/lib/tour.js"></script>
-    
+    <script src="js/scriptsbbdd.js?version=3"></script>
+    <script>
+        var originalTitle = document.title;
+        
+        document.title = "Stepping into the unknown";
+        
+        var loadCompleted = false;
+        var loadTimestamp = 0;
+        
+        window.addEventListener("load", function() {
+            loadCompleted = true;
+            loadTimestamp = Date.now();
+            if (!document.hidden) {
+                document.title = "Well, now you’re here.";
+                setTimeout(function() {
+                    if (!document.hidden) {
+                        document.title = originalTitle;
+                    }
+                }, 1000);
+            }
+        });
+        
+        document.addEventListener("click", function(e) {
+            var anchor = e.target.closest("a");
+            if (anchor) {
+                var href = anchor.getAttribute("href");
+                if (href && !href.startsWith("http") && !href.startsWith("#")) {
+                    document.title = "Stepping into the unknown";
+                }
+            }
+        });
+        
+        window.addEventListener("beforeunload", function(e) {
+            document.title = "Stepping into the unknown";
+        });
+        
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "❓ Was it something I said?";
+            } else {
+                if (!loadCompleted) {
+                    document.title = "Stepping into the unknown";
+                } else {
+                    if (Date.now() - loadTimestamp >= 1000) {
+                        document.title = originalTitle;
+                    } else {
+                        document.title = "Well, now you’re here.";
+                    }
+                }
+            }
+        });
+        
+        const originalFavicon = document.querySelector("link[rel='icon']")?.getAttribute("href");
+        
+        function changeFavicon(src) {
+            let favicon = document.querySelector("link[rel*='icon']");
+            if (favicon) {
+                favicon.href = src;
+            } else {
+                favicon = document.createElement("link");
+                favicon.rel = "icon";
+                favicon.href = src;
+                document.head.appendChild(favicon);
+            }
+        }
+        
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                changeFavicon("https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/close.png");
+            } else {
+                changeFavicon(originalFavicon || "https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/fav.png");
+            }
+        });
+    </script>
 </body>
 
 </html>
