@@ -72,9 +72,7 @@
   }
   
   @media (min-width: 768px) {
-    .font-loop {
-      
-    }
+    .font-loop {}
   }
   
   :root {
@@ -2109,51 +2107,58 @@ xxxl:   1600+
     text-align: left;
   }
   
-  .window.subscribe-window .signup-container .signup-form-container {
-    padding: 1.7rem 13%;
+  .signup-form-container {
+    padding: 1.7rem 5%;
     display: flex;
     justify-content: center;
     align-items: center;
-    
   }
   
-  .window.subscribe-window .signup-container .signup-form-container form {
+  .signup-form-container form {
     display: grid;
-    grid-template-columns: 1fr 5rem;
     max-width: 30rem;
     width: 100%;
-    gap: 1rem;
-    
+    gap: 3rem;
+    text-align: left;
   }
   
-  .window.subscribe-window .signup-container .signup-form-container form input[type=email] {
+  .signup-form-container form input,
+  .signup-form-container form textarea {
     border: none;
     border-bottom: 1px solid var(--bg-color);
     color: var(--bg-color);
     width: 100%;
     padding: 0.5rem;
-    
-    font-family: var(--main-large-font);
+    font-family: var(--main-font);
+    background-color: transparent;
+    outline: none;
+    margin-top: 1rem;
   }
   
-  .window.subscribe-window .signup-container .signup-form-container form input[type=email]::placeholder {
+  .signup-form-container form input::placeholder,
+  .signup-form-container form textarea::placeholder {
     color: var(--bg-color);
     font-family: var(--main-large-font);
-    
   }
   
-  .window.subscribe-window .signup-container .signup-form-container form button {
+  .signup-form-container form button {
     background-color: var(--bg-color);
     color: white;
-    padding: 0.5rem;
-    letter-spacing: 0;
+    padding: 1rem;
     border: none;
     cursor: pointer;
+    font-family: var(--main-large-font);
+  }
+  
+  .status-msg {
+    color: var(--bg-color);
+    font-family: var(--main-large-font);
+    text-align: center;
   }
   
   @media (max-width: 768px) {
-    .window.subscribe-window .signup-container .signup-form-container form button {
-      font-size: initial;
+    .signup-form-container form button {
+      font-size: 1.5rem;
     }
   }
   

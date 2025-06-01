@@ -1,126 +1,38 @@
-<!DOCTYPE html>
-<html>
+<form id="contact-form">
+  <label for="name">الاسم:</label>
+  <input type="text" id="name" name="name" required>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-</head>
-<style>
-  @font-face {
-    font-family: 'DOSANK24';
-    src: url('assets/fonts/web_dos-v_re_ank24.ttf')
-    format(truetype);
+  <label for="email">البريد الإلكتروني:</label>
+  <input type="email" id="email" name="email" required>
 
-}
+  <label for="subject">الموضوع:</label>
+  <input type="text" id="subject" name="subject" required>
 
-@font-face {
-    font-family: 'DOSANK16';
-    src: url('assets/fonts/web_dos-v_re_ank16.ttf')
-    format(truetype);
+  <label for="message">الرسالة:</label>
+  <textarea id="message" name="message" required></textarea>
 
-}
+  <button type="submit">إرسال</button>
+</form>
 
-@font-face {
-    font-family: 'TimesNewCustom';
-    src: url('assets/fonts/times_new_roman.ttf')
-    format(truetype);
+<p id="status-message"></p>
 
-}
+<!-- تحميل مكتبة EmailJS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-@font-face {
-    font-family: 'Screenstar';
-    src: url('assets/fonts/screenstar_small_ot_w03_bold.ttf')
-    format(truetype);
+<script type="text/javascript">
+  // تهيئة EmailJS بالمفتاح العام
+  emailjs.init({ publicKey: '22hFsgtwZz1baWIHr' });
 
-}
+  // التعامل مع إرسال النموذج
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-
-
-
-@font-face {
-    font-family: 'CoralPixels';
-    src: url('assets/fonts/CoralPixels-Regular.ttf')
-    format(truetype);
-
-}
-
-@font-face {
-    font-family: 'VariableFont_ROND';
-    src: url('assets/fonts/Doto-VariableFont_ROND,wght.ttf')
-    format(truetype);
-
-}
-
-@font-face {
-    font-family: 'Jacquard24Charted';
-    src: url('assets/fonts/Jacquard24Charted-Regular.ttf')
-    format(truetype);
-
-}
-
-@font-face {
-    font-family: 'PixelifySans';
-    src: url('assets/fonts/PixelifySans-VariableFont_wght.ttf')
-    format(truetype);
-
-}
-
-@font-face {
-    font-family: 'PressStart2P';
-    src: url('assets/fonts/PressStart2P-Regular.ttf')
-    format(truetype);
-
-}
-
-@font-face {
-    font-family: 'SixtyfourConvergence';
-    src: url('assets/fonts/SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf')
-    format(truetype);
-}
-
-
-@font-face {
-    font-family: 'Tiny5';
-    src: url('/assets/fonts/Tiny5-Regular.ttf');
-}
-
-#changing-text {
-    font-family: 'DOSANK24'; /* الخط الابتدائي */
-    color: black;
-
-}
-</style>
-<body>
-<h2 id="changing-text">Welcome, unfortunately</h2>
-
-<button class="btn btn-basic is-uppercase" onclick="playLoop()">
-    KARRAR NAZIM
-</button>
-  
-</body>
-
-<script>
-const fonts = [
-    'DOSANK24', 'DOSANK16', 'TimesNewCustom', 'Screenstar',
-    'Tiny5', 'SixtyfourConvergence', 'PressStart2P',
-    'PixelifySans', 'VariableFont_ROND', 'CoralPixels', 'DOSANK24'
-];
-
-async function loadFonts() {
-    await Promise.all(fonts.map(f => document.fonts.load(`16px "${f}"`)));
-}
-
-async function playLoop() {
-    await loadFonts(); // انتظر تحميل الخطوط
-    const text = document.getElementById("changing-text");
-    let i = 0;
-    const interval = setInterval(() => {
-        text.style.fontFamily = fonts[i % fonts.length];
-        i++;
-        if (i >= fonts.length) clearInterval(interval);
-    }, 150);
-}
+    emailjs.sendForm('service_ensplx8', 'template_p18srdw', this)
+      .then(() => {
+        document.getElementById('status-message').innerText = '✅ تم إرسال الرسالة بنجاح!';
+        this.reset();
+      }, (error) => {
+        document.getElementById('status-message').innerText = '❌ حدث خطأ أثناء الإرسال: ' + error.text;
+      });
+  });
 </script>
-
-</html>
