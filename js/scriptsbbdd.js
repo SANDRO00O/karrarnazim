@@ -58,9 +58,11 @@ var phraseCarouselInterval;
         })
         
         /*-- Clock --*/
+        let nowIQ = moment().tz("Asia/Baghdad").format('hh:mm A');
         let nowUS = moment().tz("America/Los_Angeles").format('hh:mm A');
         let nowUK = moment().tz("Europe/London").format('hh:mm A');
         let nowJP = moment().tz("Asia/Tokyo").format('hh:mm A');
+        $('#current-iq').html(nowIQ);
         $('#current-us').html(nowUS);
         $('#current-uk').html(nowUK);
         $('#current-jp').html(nowJP);
