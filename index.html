@@ -548,6 +548,7 @@
         }, chaosLines.length * 1000 + 300);
     };
 </script>
+
     <script>
         var originalTitle = document.title;
         
@@ -615,9 +616,9 @@
         
         document.addEventListener("visibilitychange", function() {
             if (document.hidden) {
-                changeFavicon("https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/fav.png");
+                changeFavicon("https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/closed.png");
             } else {
-                changeFavicon(originalFavicon || "https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/close.png");
+                changeFavicon(originalFavicon || "https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/fav.png");
             }
         });
     </script>
