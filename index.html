@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KARRAR NAZIM</title>
-    <link rel="stylesheet" id="css-library" href="css/styleff0b.css?rev=10" media="all">
     <meta name="description" content="I'm Karar, a web developer since 2022. I chose this path because life didn’t give me a better option. I build websites that reflect me: sometimes chaotic, sometimes brilliant, and they mostly work.">
     <meta property="og:title" content="KARRAR NAZIM">
     
@@ -24,6 +23,8 @@
     
     <!-- Fontawesome -->
     <script src="../kit.fontawesome.com/f55a23c83c.html" crossorigin="anonymous"></script>
+    <link rel="stylesheet" id="css-library" href="css/styleff0b.css?rev=10" media="all">
+
 </head>
 
 <body>
@@ -100,7 +101,7 @@
         <div class="desktop-area">
             <nav>
                 <a data-trigger="music-window" class="win-trigger icon icon_music">
-                    <span>I Love Music</span>
+                    <span>Music</span>
                 </a>
                 
                 <a data-trigger="subscribe-window" class="win-trigger icon icon_subscribe">
@@ -179,7 +180,7 @@
             <nav>
                 <button data-trigger="music-window" class="win-trigger">
                     <span>
-                        I Love Music
+                        Music
                     </span>
                 </button>
                 
@@ -355,7 +356,7 @@
             <nav>
                 <button data-trigger="music-window" class="win-trigger current-window">
                     <span>
-                        I Love Music
+                        Music
                     </span>
                 </button>
                 
@@ -391,15 +392,51 @@
                     <img src="assets/img/window/music/electspin.gif" alt="Electric guitar" class="electric-guitar">
                 </div>
                 
-                
+                <!-- مشغل الموسيقى الجديد -->
+                <div class="music-player-container">
+                    <div class="player-header">
+                        <h3>Music Player</h3>
+                        <span class="pulsing">♪♫</span>
+                    </div>
+                    
+                    <div class="now-playing">
+                        <div class="song-title" id="currentSongTitle">You And Whose Army?</div>
+                        <div class="song-artist" id="currentSongArtist">Radiohead</div>
+                    </div>
+                    
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="control-btn" id="prevBtn">⏮</button>
+                        <button class="control-btn play-btn" id="playBtn">▶</button>
+                        <button class="control-btn" id="nextBtn">⏭</button>
+                    </div>
+                    
+                    <div class="volume-container">
+                        <button class="control-btn" id="volumeBtn">🔊</button>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.7">
+                    </div>
+                    
+                    <div class="playlist" id="playlist">
+                        <!-- سيتم ملء قائمة التشغيل بالجافاسكريبت -->
+                    </div>
+                </div>
                 
                 <div class="animated-cd">
-                    <img src="assets/img/window/music/cd.gif" alt="CD">
-                    <img src="assets/img/window/music/cd.gif" alt="CD">
-                    <img src="assets/img/window/music/cd.gif" alt="CD">
-                    <img src="assets/img/window/music/cd.gif" alt="CD">
-                    <img src="assets/img/window/music/cd.gif" alt="CD">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
                 </div>
+                
                 <div class="window-footer">
                     <div class="content">
                         <p>
@@ -433,7 +470,7 @@
             <nav>
                 <button data-trigger="music-window" class="win-trigger">
                     <span>
-                        I Love Music
+                        Music
                     </span>
                 </button>
                 
@@ -683,6 +720,224 @@
             }
         });
     </script>
+        <script>
+        // بيانات الأغاني
+        const songs = [
+            {
+                title: "You And Whose Army?",
+                artist: "Radiohead",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/You-And-Whose-Army.mp3"
+            },
+            {
+                title: "The Kids from Yesterday",
+                artist: "My Chemical Romance",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/The-Kids-from-Yesterday.mp3"
+            },
+            {
+                title: "Lift",
+                artist: "Radiohead",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Lift.mp3"
+            },
+            {
+                title: "Early Sunsets Over Monroeville",
+                artist: "My Chemical Romance",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Early-Sunsets-Over-Monroeville.mp3"
+            },
+            {
+                title: "Demolition Lovers",
+                artist: "My Chemical Romance",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Demolition-Lovers.mp3"
+            },
+            {
+                title: "Dead!",
+                artist: "My Chemical Romance",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Dead!.mp3"
+            }
+        ];
+        
+        // عناصر DOM
+        const audio = new Audio();
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const playlistEl = document.getElementById('playlist');
+        const currentSongTitle = document.getElementById('currentSongTitle');
+        const currentSongArtist = document.getElementById('currentSongArtist');
+        
+        // حالة المشغل
+        let isPlaying = false;
+        let currentSongIndex = 0;
+        
+        // تهيئة المشغل
+        function initPlayer() {
+            // إنشاء قائمة التشغيل
+            songs.forEach((song, index) => {
+                const songElement = document.createElement('div');
+                songElement.classList.add('playlist-item');
+                if (index === currentSongIndex) {
+                    songElement.classList.add('active');
+                }
+                songElement.innerHTML = `
+                    <strong>${song.title}</strong>
+                    <div>${song.artist}</div>
+                `;
+                songElement.dataset.index = index;
+                playlistEl.appendChild(songElement);
+                
+                songElement.addEventListener('click', () => {
+                    currentSongIndex = parseInt(songElement.dataset.index);
+                    loadSong(currentSongIndex);
+                    playSong();
+                    
+                    // تحديث العنصر النشط في القائمة
+                    document.querySelectorAll('.playlist-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    songElement.classList.add('active');
+                });
+            });
+            
+            // تحميل الأغنية الأولى
+            loadSong(currentSongIndex);
+            
+            // أحداث المشغل
+            playBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    pauseSong();
+                } else {
+                    playSong();
+                }
+            });
+            
+            prevBtn.addEventListener('click', playPrevSong);
+            nextBtn.addEventListener('click', playNextSong);
+            
+            volumeSlider.addEventListener('input', () => {
+                audio.volume = volumeSlider.value;
+                updateVolumeIcon();
+            });
+            
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('ended', playNextSong);
+            
+            progressContainer.addEventListener('click', setProgress);
+            
+            // تحديث أيقونة الصوت بناءً على القيمة الابتدائية
+            updateVolumeIcon();
+        }
+        
+        // تحميل أغنية
+        function loadSong(index) {
+            const song = songs[index];
+            audio.src = song.src;
+            currentSongTitle.textContent = song.title;
+            currentSongArtist.textContent = song.artist;
+        }
+        
+        // تشغيل الأغنية
+        function playSong() {
+            isPlaying = true;
+            audio.play();
+            playBtn.textContent = '⏸';
+            document.querySelector('.rotating').style.animationPlayState = 'running';
+        }
+        
+        // إيقاف الأغنية
+        function pauseSong() {
+            isPlaying = false;
+            audio.pause();
+            playBtn.textContent = '▶';
+            document.querySelector('.rotating').style.animationPlayState = 'paused';
+        }
+        
+        // الأغنية السابقة
+        function playPrevSong() {
+            currentSongIndex--;
+            if (currentSongIndex < 0) {
+                currentSongIndex = songs.length - 1;
+            }
+            loadSong(currentSongIndex);
+            playSong();
+            updateActivePlaylistItem();
+        }
+        
+        // الأغنية التالية
+        function playNextSong() {
+            currentSongIndex++;
+            if (currentSongIndex > songs.length - 1) {
+                currentSongIndex = 0;
+            }
+            loadSong(currentSongIndex);
+            playSong();
+            updateActivePlaylistItem();
+        }
+        
+        // تحديث شريط التقدم
+        function updateProgress(e) {
+            const { duration, currentTime } = e.srcElement;
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            // تحديث الوقت الحالي
+            currentTimeEl.textContent = formatTime(currentTime);
+            
+            // تحديث المدة الكلية
+            if (!isNaN(duration)) {
+                durationEl.textContent = formatTime(duration);
+            }
+        }
+        
+        // تحديد التقدم بالنقر على شريط التقدم
+        function setProgress(e) {
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            
+            audio.currentTime = (clickX / width) * duration;
+        }
+        
+        // تحديث أيقونة الصوت
+        function updateVolumeIcon() {
+            const volume = audio.volume;
+            
+            if (volume === 0) {
+                volumeBtn.textContent = '🔇';
+            } else if (volume < 0.3) {
+                volumeBtn.textContent = '🔈';
+            } else {
+                volumeBtn.textContent = '🔊';
+            }
+        }
+        
+        // تحديث العنصر النشط في قائمة التشغيل
+        function updateActivePlaylistItem() {
+            document.querySelectorAll('.playlist-item').forEach((item, index) => {
+                if (index === currentSongIndex) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
+        // تنسيق الوقت (تحويل الثواني إلى دقائق:ثواني)
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            seconds = Math.floor(seconds % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+        
+        // تهيئة المشغل عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', initPlayer);
+    </script>
+    
+    
 </body>
 
 </html>

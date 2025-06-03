@@ -1,34 +1,548 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" id="css-library" href="css/styleff0b.css?rev=10" media="all">
+
+    <title>KARRAR NAZIM - Music Player</title>
+    <style>
+        /* استيراد أنماط الموقع الأصلية */
+        :root {
+            --main-color: #000000;
+            --window-color: #CCCCCC;
+            --window-active-color: #afafaf;
+            --border-color: #707070;
+            --border-light-color: #FFFFFF;
+            --border-shadow-color: #333333;
+            --bg-color: #0B17B4;
+            --green-color: #60CD46;
+            --red-color: #CC1B1B;
+            --window-title-bar-color: #011E75;
+            --main-font: "webdos16", sans-serif;
+            --main-large-font: "webdos24", sans-serif;
+            --window-title-font: "screenstar", sans-serif;
+            --link-font: "times", sans-serif;
+            --font-base-weight: 400;
+            --font-bold-weight: 1000;
+            --font-base-size: 1.6rem;
+        }
+        
+        /* أنماط خاصة بالمشغل الموسيقي */
+        .music-player-container {
+            width: 90%;
+            max-width: 500px;
+            margin: 3rem auto;
+            background-color: var(--window-color);
+            border-top: 1px solid var(--border-light-color);
+            border-right: 1px solid var(--border-shadow-color);
+            border-bottom: 1px solid var(--border-shadow-color);
+            border-left: 1px solid var(--border-light-color);
+            padding: 2rem;
+        }
+        
+        .player-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .player-header h3 {
+            font-family: var(--window-title-font);
+            font-size: 2rem;
+            color: var(--main-color);
+            margin: 0;
+        }
+        
+        .now-playing {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .now-playing .song-title {
+            font-family: var(--main-large-font);
+            font-size: 2.4rem;
+            color: var(--bg-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .now-playing .song-artist {
+            font-family: var(--main-font);
+            font-size: 1.8rem;
+            color: var(--main-color);
+        }
+        
+        .progress-container {
+            background-color: var(--border-light-color);
+            border-radius: 0;
+            height: 8px;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-bar {
+            background-color: var(--bg-color);
+            height: 100%;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--main-font);
+            font-size: 1.4rem;
+            color: var(--main-color);
+            margin-bottom: 2rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .control-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 2.5rem;
+            color: var(--bg-color);
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            color: var(--window-title-bar-color);
+            transform: scale(1.1);
+        }
+        
+        .play-btn {
+            font-size: 4rem;
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .volume-container .control-btn {
+            font-size: 2rem;
+        }
+        
+        .volume-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            background: var(--border-light-color);
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: var(--bg-color);
+            cursor: pointer;
+        }
+        
+        .playlist {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+        
+        .playlist-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-family: var(--main-font);
+            font-size: 1.6rem;
+            color: var(--main-color);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .playlist-item:hover {
+            background-color: var(--window-active-color);
+        }
+        
+        .playlist-item.active {
+            background-color: var(--bg-color);
+            color: white;
+        }
+        
+        /* شريط التمرير المخصص */
+        .playlist::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .playlist::-webkit-scrollbar-track {
+            background: var(--window-color);
+        }
+        
+        .playlist::-webkit-scrollbar-thumb {
+            background-color: var(--bg-color);
+            border-radius: 4px;
+        }
+        
+        /* الأنيميشن للأيقونات */
+        .rotating {
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .pulsing {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
-
 <body>
-  <audio id="player" controls></audio>
-
-<select id="songSelect">
-  <option value="You%20And%20Whose%20Army-.mp3">You And Whose Army?</option>
-  <option value="The%20Kids%20from%20Yesterday.mp3">The Kids from Yesterday</option>
-  <option value="Lift.mp3">Lift</option>
-  <option value="Early%20Sunsets%20Over%20Monroeville.mp3">Early Sunsets Over Monroeville</option>
-  <option value="Demolition%20Lovers.mp3">Demolition Lovers</option>
-  <option value="Dead!.mp3">Dead!</option>
-</select>
-
-<script>
-  const baseURL = "https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/assets/music/";
-  const player = document.getElementById("player");
-  const select = document.getElementById("songSelect");
-  
-  select.addEventListener("change", function() {
-    player.src = baseURL + this.value;
-    player.play();
-  });
-</script>
+    <!-- نافذة الموسيقى مع المشغل الجديد -->
+    <div class="window music-window">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/Music</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger current-window">
+                    <span>
+                        I Love Music
+                    </span>
+                </button>
+                
+                <button data-trigger="videos-window" class="win-trigger">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <div class="window-content-header">
+                    <h2>
+                        Music
+                    </h2>
+                    <img src="assets/img/window/music/treblerotate1.gif" alt="Treble" class="treble-left">
+                    <img src="assets/img/window/music/radior.gif" alt="Small speaker" class="small-speaker-left">
+                    <img src="assets/img/window/music/speakers.gif" alt="Large speaker" class="large-speaker-left">
+                    <img src="assets/img/window/music/listen.gif" alt="Listen" class="listen">
+                    <img src="assets/img/window/music/speakers.gif" alt="Large speaker" class="large-speaker-right">
+                    <img src="assets/img/window/music/radior.gif" alt="Small speaker" class="small-speaker-right">
+                    <img src="assets/img/window/music/treblerotate1.gif" alt="Treble" class="treble-right">
+                    <img src="assets/img/window/music/elephant_ear.gif" alt="Elephant" class="elephant">
+                    <img src="assets/img/window/music/music.gif" alt="Violinist" class="violinist-left">
+                    <img src="assets/img/window/music/diablo.gif" alt="Diablo" class="diablo">
+                    <img src="assets/img/window/music/electspin.gif" alt="Electric guitar" class="electric-guitar">
+                </div>
+                
+                <!-- مشغل الموسيقى الجديد -->
+                <div class="music-player-container">
+                    <div class="player-header">
+                        <h3>Music Player</h3>
+                        <span class="pulsing">♪♫</span>
+                    </div>
+                    
+                    <div class="now-playing">
+                        <div class="song-title" id="currentSongTitle">You And Whose Army?</div>
+                        <div class="song-artist" id="currentSongArtist">Radiohead</div>
+                    </div>
+                    
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="control-btn" id="prevBtn">⏮</button>
+                        <button class="control-btn play-btn" id="playBtn">▶</button>
+                        <button class="control-btn" id="nextBtn">⏭</button>
+                    </div>
+                    
+                    <div class="volume-container">
+                        <button class="control-btn" id="volumeBtn">🔊</button>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.7">
+                    </div>
+                    
+                    <div class="playlist" id="playlist">
+                        <!-- سيتم ملء قائمة التشغيل بالجافاسكريبت -->
+                    </div>
+                </div>
+                
+                <div class="animated-cd">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                </div>
+                
+                <div class="window-footer">
+                    <div class="content">
+                        <p>
+                            Karrar Nazim 2025&copy; |
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // بيانات الأغاني
+        const songs = [
+            {
+                title: "You And Whose Army?",
+                artist: "Radiohead",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/You-And-Whose-Army.mp3"
+            },
+            {
+                title: "The Kids from Yesterday",
+                artist: "My Chemical Romance",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/The-Kids-from-Yesterday.mp3"
+            },
+            {
+                title: "Lift",
+                artist: "Radiohead",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Lift.mp3"
+            },
+            {
+                title: "Early Sunsets Over Monroeville",
+                artist: "My Chemical Romance",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Early-Sunsets-Over-Monroeville.mp3"
+            },
+            {
+                title: "Demolition Lovers",
+                artist: "My Chemical Romance",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Demolition-Lovers.mp3"
+            },
+            {
+                title: "Dead!",
+                artist: "My Chemical Romance",
+                src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Dead!.mp3"
+            }
+        ];
+        
+        // عناصر DOM
+        const audio = new Audio();
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const playlistEl = document.getElementById('playlist');
+        const currentSongTitle = document.getElementById('currentSongTitle');
+        const currentSongArtist = document.getElementById('currentSongArtist');
+        
+        // حالة المشغل
+        let isPlaying = false;
+        let currentSongIndex = 0;
+        
+        // تهيئة المشغل
+        function initPlayer() {
+            // إنشاء قائمة التشغيل
+            songs.forEach((song, index) => {
+                const songElement = document.createElement('div');
+                songElement.classList.add('playlist-item');
+                if (index === currentSongIndex) {
+                    songElement.classList.add('active');
+                }
+                songElement.innerHTML = `
+                    <strong>${song.title}</strong>
+                    <div>${song.artist}</div>
+                `;
+                songElement.dataset.index = index;
+                playlistEl.appendChild(songElement);
+                
+                songElement.addEventListener('click', () => {
+                    currentSongIndex = parseInt(songElement.dataset.index);
+                    loadSong(currentSongIndex);
+                    playSong();
+                    
+                    // تحديث العنصر النشط في القائمة
+                    document.querySelectorAll('.playlist-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    songElement.classList.add('active');
+                });
+            });
+            
+            // تحميل الأغنية الأولى
+            loadSong(currentSongIndex);
+            
+            // أحداث المشغل
+            playBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    pauseSong();
+                } else {
+                    playSong();
+                }
+            });
+            
+            prevBtn.addEventListener('click', playPrevSong);
+            nextBtn.addEventListener('click', playNextSong);
+            
+            volumeSlider.addEventListener('input', () => {
+                audio.volume = volumeSlider.value;
+                updateVolumeIcon();
+            });
+            
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('ended', playNextSong);
+            
+            progressContainer.addEventListener('click', setProgress);
+            
+            // تحديث أيقونة الصوت بناءً على القيمة الابتدائية
+            updateVolumeIcon();
+        }
+        
+        // تحميل أغنية
+        function loadSong(index) {
+            const song = songs[index];
+            audio.src = song.src;
+            currentSongTitle.textContent = song.title;
+            currentSongArtist.textContent = song.artist;
+        }
+        
+        // تشغيل الأغنية
+        function playSong() {
+            isPlaying = true;
+            audio.play();
+            playBtn.textContent = '⏸';
+            document.querySelector('.rotating').style.animationPlayState = 'running';
+        }
+        
+        // إيقاف الأغنية
+        function pauseSong() {
+            isPlaying = false;
+            audio.pause();
+            playBtn.textContent = '▶';
+            document.querySelector('.rotating').style.animationPlayState = 'paused';
+        }
+        
+        // الأغنية السابقة
+        function playPrevSong() {
+            currentSongIndex--;
+            if (currentSongIndex < 0) {
+                currentSongIndex = songs.length - 1;
+            }
+            loadSong(currentSongIndex);
+            playSong();
+            updateActivePlaylistItem();
+        }
+        
+        // الأغنية التالية
+        function playNextSong() {
+            currentSongIndex++;
+            if (currentSongIndex > songs.length - 1) {
+                currentSongIndex = 0;
+            }
+            loadSong(currentSongIndex);
+            playSong();
+            updateActivePlaylistItem();
+        }
+        
+        // تحديث شريط التقدم
+        function updateProgress(e) {
+            const { duration, currentTime } = e.srcElement;
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            // تحديث الوقت الحالي
+            currentTimeEl.textContent = formatTime(currentTime);
+            
+            // تحديث المدة الكلية
+            if (!isNaN(duration)) {
+                durationEl.textContent = formatTime(duration);
+            }
+        }
+        
+        // تحديد التقدم بالنقر على شريط التقدم
+        function setProgress(e) {
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            
+            audio.currentTime = (clickX / width) * duration;
+        }
+        
+        // تحديث أيقونة الصوت
+        function updateVolumeIcon() {
+            const volume = audio.volume;
+            
+            if (volume === 0) {
+                volumeBtn.textContent = '🔇';
+            } else if (volume < 0.3) {
+                volumeBtn.textContent = '🔈';
+            } else {
+                volumeBtn.textContent = '🔊';
+            }
+        }
+        
+        // تحديث العنصر النشط في قائمة التشغيل
+        function updateActivePlaylistItem() {
+            document.querySelectorAll('.playlist-item').forEach((item, index) => {
+                if (index === currentSongIndex) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
+        // تنسيق الوقت (تحويل الثواني إلى دقائق:ثواني)
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            seconds = Math.floor(seconds % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+        
+        // تهيئة المشغل عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', initPlayer);
+    </script>
 </body>
-
 </html>
