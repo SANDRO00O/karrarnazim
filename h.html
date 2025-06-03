@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <audio id="player" controls></audio>
+
+<select id="songSelect">
+  <option value="You%20And%20Whose%20Army-.mp3">You And Whose Army?</option>
+  <option value="The%20Kids%20from%20Yesterday.mp3">The Kids from Yesterday</option>
+  <option value="Lift.mp3">Lift</option>
+  <option value="Early%20Sunsets%20Over%20Monroeville.mp3">Early Sunsets Over Monroeville</option>
+  <option value="Demolition%20Lovers.mp3">Demolition Lovers</option>
+  <option value="Dead!.mp3">Dead!</option>
+</select>
+
+<script>
+  const baseURL = "https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/assets/music/";
+  const player = document.getElementById("player");
+  const select = document.getElementById("songSelect");
+  
+  select.addEventListener("change", function() {
+    player.src = baseURL + this.value;
+    player.play();
+  });
+</script>
+</body>
+
+</html>
