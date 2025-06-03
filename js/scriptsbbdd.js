@@ -221,7 +221,7 @@ function openWindow(windowAttr) {
 /*-- Year --*/
 const y = new Date();
 let year = y.getFullYear();
-document.getElementsByClassName("current-year").innerHTML = year;
+document.getElementsByClassName("current-year")[0].innerHTML = year;
 /*-- End Year --*/
 
 /*-- Current time --*/
