@@ -739,10 +739,10 @@
             src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Street-Spirit-(Fade-Out).mp3"
         },
         {
-    title: "Vampires Will Never Hurt You",
-    artist: "My Chemical Romance",
-    src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Vampires-Will-Never-Hurt-You.mp3"
-},
+            title: "Vampires Will Never Hurt You",
+            artist: "My Chemical Romance",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Vampires-Will-Never-Hurt-You.mp3"
+        },
         {
             title: "Lift",
             artist: "Radiohead",
@@ -766,6 +766,7 @@
         
         // عناصر DOM
         const audio = new Audio();
+        audio.preload = "none"; // ✅ هذا هو السطر المهم
         const playBtn = document.getElementById('playBtn');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
