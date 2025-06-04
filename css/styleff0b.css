@@ -1950,8 +1950,7 @@ xxxl:   1600+
   }
   
   .window header .title-bar .title h2 {
-    overflow-x: hidden;
-    
+    overflow-x: auto;
     color: white;
     background-color: var(--window-title-bar-color);
     font-family: var(--window-title-font);
