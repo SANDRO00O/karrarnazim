@@ -29,6 +29,13 @@
 
 <body>
     
+    <style>
+        body.chaos-loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+    </style>
+    
     <div id="chaos-loader" style="
   position: fixed;
   inset: 0;
@@ -45,12 +52,42 @@
   font-size: 1.5rem;
   line-height: 1.3rem;
 ">
-         <div id="chaos-text">waking up the website<span id="dots"></span></div>
+        <div id="chaos-text">waking up the website<span id="dots"></span></div>
     </div>
     
     <div id="loading_unix" class="hidden">
         <div id="loading_unix_content"></div>
     </div>
+    
+    <script>
+        // إضافة كلاس التحميل للجسم
+        document.body.classList.add('chaos-loading');
+        
+        const dots = document.getElementById('dots');
+        let dotCount = 0;
+        let dotInterval;
+        
+        // بدء الرسوم المتحركة فور تحميل DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            dotInterval = setInterval(() => {
+                dotCount = (dotCount + 1) % 4;
+                dots.textContent = '.'.repeat(dotCount);
+            }, 500);
+            
+            // إخفاء اللودر عند اكتمال تحميل الصفحة
+            window.addEventListener('load', () => {
+                const loader = document.getElementById('chaos-loader');
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.8s ease';
+                
+                setTimeout(() => {
+                    clearInterval(dotInterval);
+                    loader.remove();
+                    document.body.classList.remove('chaos-loading');
+                }, 2000);
+            });
+        });
+    </script>
     
     <div id="loading_overlay" class="">
         <div class="loading-wrap">
@@ -141,7 +178,7 @@
             <div class="title-bar drag-handle">
                 <div class="title">
                     <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
-                    <h2>KARRARNAZIM/copyright</h2>
+                    <h2>KARRARNAZIM/COPYRIGHT</h2>
                 </div>
                 <span class="btn btn-close" title="Close">
                     <a href="#">X</a>
@@ -280,7 +317,7 @@
             <div class="title-bar drag-handle">
                 <div class="title">
                     <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
-                    <h2>KARRARNAZIM/About</h2>
+                    <h2>KARRARNAZIM/ABOUT</h2>
                 </div>
                 <button class="btn btn-toggle-mobile-menu">
                     <span class="sr-only">
@@ -456,7 +493,7 @@
             <div class="title-bar drag-handle">
                 <div class="title">
                     <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
-                    <h2>KARRARNAZIM/Music</h2>
+                    <h2>KARRARNAZIM/MUSIC</h2>
                 </div>
                 <button class="btn btn-toggle-mobile-menu">
                     <span class="sr-only">
@@ -570,7 +607,7 @@
             <div class="title-bar drag-handle">
                 <div class="title">
                     <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
-                    <h2>KARRARNAZIM/My_Projects</h2>
+                    <h2>KARRARNAZIM/MY_PROJECTS</h2>
                 </div>
                 <button class="btn btn-toggle-mobile-menu">
                     <span class="sr-only">
@@ -644,7 +681,7 @@
             <div class="title-bar drag-handle">
                 <div class="title">
                     <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
-                    <h2>KARRARNAZIM/Screensaver</h2>
+                    <h2>KARRARNAZIM/SCREENSAVER</h2>
                 </div>
                 <span class="btn btn-close" title="Close">
                     <a href="#">X</a>
@@ -725,28 +762,6 @@
                 });
         });
     </script>
-    
-    
-<script>
-    const dots = document.getElementById('dots');
-    let dotCount = 0;
-
-    const dotInterval = setInterval(() => {
-        dotCount = (dotCount + 1) % 4; // 0 to 3
-        dots.textContent = '.'.repeat(dotCount);
-    }, 500);
-
-    window.onload = () => {
-        const loader = document.getElementById('chaos-loader');
-        loader.style.opacity = '0';
-        loader.style.transition = 'opacity 0.8s ease';
-        setTimeout(() => {
-            clearInterval(dotInterval);
-            loader.remove();
-        }, 2000); // adjust duration as needed
-    };
-</script>
-
     
     <script>
         var originalTitle = document.title;
