@@ -1,66 +1,66 @@
   @font-face {
     font-family: 'DOSANK24';
-    src: url('/assets/fonts/web_dos-v_re_ank24.ttf') format(truetype);
+    src: url('/assets/fonts/web_dos-v_re_ank24.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'DOSANK16';
-    src: url('/assets/fonts/web_dos-v_re_ank16.ttf') format(truetype);
+    src: url('/assets/fonts/web_dos-v_re_ank16.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'TimesNewCustom';
-    src: url('/assets/fonts/times_new_roman.ttf') format(truetype);
+    src: url('/assets/fonts/times_new_roman.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'Screenstar';
-    src: url('/assets/fonts/screenstar_small_ot_w03_bold.ttf') format(truetype);
+    src: url('/assets/fonts/screenstar_small_ot_w03_bold.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'CoralPixels';
-    src: url('/assets/fonts/CoralPixels-Regular.ttf') format(truetype);
+    src: url('/assets/fonts/CoralPixels-Regular.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'VariableFont_ROND';
-    src: url('/assets/fonts/Doto-VariableFont_ROND,wght.ttf') format(truetype);
+    src: url('/assets/fonts/Doto-VariableFont_ROND,wght.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'Jacquard24Charted';
-    src: url('/assets/fonts/Jacquard24Charted-Regular.ttf') format(truetype);
+    src: url('/assets/fonts/Jacquard24Charted-Regular.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'PixelifySans';
-    src: url('/assets/fonts/PixelifySans-VariableFont_wght.ttf') format(truetype);
+    src: url('/assets/fonts/PixelifySans-VariableFont_wght.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'PressStart2P';
-    src: url('/assets/fonts/PressStart2P-Regular.ttf') format(truetype);
+    src: url('/assets/fonts/PressStart2P-Regular.woff2') format(truetype);
     
   }
   
   @font-face {
     font-family: 'SixtyfourConvergence';
-    src: url('/assets/fonts/SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf') format(truetype);
+    src: url('/assets/fonts/SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.woff2') format(truetype);
   }
   
   
   @font-face {
     font-family: 'Tiny5';
-    src: url('/assets/fonts/Tiny5-Regular.ttf');
+    src: url('/assets/fonts/Tiny5-Regular.woff2');
   }
   
   .font-loop {
@@ -71,9 +71,6 @@
     text-align: center;
   }
   
-  @media (min-width: 768px) {
-    .font-loop {}
-  }
   
   /* استيراد أنماط الموقع الأصلية */
   :root {
@@ -481,22 +478,22 @@ xxxl:   1600+
   /* Typography */
   @font-face {
     font-family: "webdos16";
-    src: url("../assets/fonts/web_dos-v_re_ank16.ttf") format("truetype");
+    src: url("/assets/fonts/web_dos-v_re_ank16.woff2") format("truetype");
   }
   
   @font-face {
     font-family: "webdos24";
-    src: url("../assets/fonts/web_dos-v_re_ank24.ttf") format("truetype");
+    src: url("/assets/fonts/web_dos-v_re_ank24.woff2") format("truetype");
   }
   
   @font-face {
     font-family: "screenstar";
-    src: url("../assets/fonts/screenstar_small_ot_w03_bold.ttf") format("truetype");
+    src: url("/assets/fonts/screenstar_small_ot_w03_bold.woff2") format("truetype");
   }
   
   @font-face {
     font-family: "times";
-    src: url("../assets/fonts/times_new_roman.ttf") format("truetype");
+    src: url("/assets/fonts/times_new_roman.woff2") format("truetype");
   }
   
   .is-uppercase {
@@ -1392,7 +1389,7 @@ xxxl:   1600+
     height: var(--icon-size);
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../assets/img/icons/grid.svg");
+    background-image: url("/assets/img/icons/grid.svg");
     position: absolute;
     top: 0;
     z-index: 10;
@@ -1430,7 +1427,7 @@ xxxl:   1600+
   
   body main .desktop-area nav a.icon_music::before,
   body main .desktop-area nav button.icon_music::before {
-    background-image: url("../assets/img/icons/music.svg");
+    background-image: url("/assets/img/icons/music.svg");
   }
   
   @media (max-width: 768px) {
@@ -1450,7 +1447,7 @@ xxxl:   1600+
   
   body main .desktop-area nav a.icon_tour::before,
   body main .desktop-area nav button.icon_tour::before {
-    background-image: url("../assets/img/icons/tour.svg");
+    background-image: url("/assets/img/icons/tour.svg");
   }
   
   @media (max-width: 768px) {
@@ -1470,7 +1467,7 @@ xxxl:   1600+
   
   body main .desktop-area nav a.icon_store::before,
   body main .desktop-area nav button.icon_store::before {
-    background-image: url("../assets/img/icons/store.svg");
+    background-image: url("/assets/img/icons/store.svg");
   }
   
   @media (max-width: 768px) {
@@ -1490,7 +1487,7 @@ xxxl:   1600+
   
   body main .desktop-area nav a.icon_subscribe::before,
   body main .desktop-area nav button.icon_subscribe::before {
-    background-image: url("../assets/img/icons/subscribe.svg");
+    background-image: url("/assets/img/icons/subscribe.svg");
   }
   
   @media (max-width: 768px) {
@@ -1510,7 +1507,7 @@ xxxl:   1600+
   
   body main .desktop-area nav a.icon_video::before,
   body main .desktop-area nav button.icon_video::before {
-    background-image: url("../assets/img/icons/video.svg");
+    background-image: url("/assets/img/icons/video.svg");
   }
   
   @media (max-width: 768px) {
@@ -1530,7 +1527,7 @@ xxxl:   1600+
   
   body main .desktop-area nav a.icon_screensaver::before,
   body main .desktop-area nav button.icon_screensaver::before {
-    background-image: url("../assets/img/icons/screensaver.svg");
+    background-image: url("/assets/img/icons/screensaver.svg");
   }
   
   @media (max-width: 768px) {
@@ -1758,7 +1755,7 @@ xxxl:   1600+
     background-color: #22527F;
     width: 2.5rem;
     height: 2.5rem;
-    background-image: url("../assets/img/window/btn_search_icon.png");
+    background-image: url("/assets/img/window/btn_search_icon.png");
     background-size: 1.6rem;
     background-position: center;
   }
@@ -1784,7 +1781,7 @@ xxxl:   1600+
   
   .btn.btn-close {
     transition: none;
-    background-image: url("../assets/img/window/btn_close.svg");
+    background-image: url("/assets/img/window/btn_close.svg");
     background-position: 0 100%;
     background-size: cover;
     width: 2.5rem;
@@ -1810,7 +1807,7 @@ xxxl:   1600+
   
   .btn.btn-toggle-mobile-menu {
     transition: none;
-    background-image: url("../assets/img/window/btn_menu.svg");
+    background-image: url("/assets/img/window/btn_menu.svg");
     background-position: 0 100%;
     background-size: cover;
     width: 2.7rem;
@@ -2731,7 +2728,7 @@ xxxl:   1600+
   }
   
   .window.tour-window .window-content-area .window-content-header {
-    background-image: url("../assets/img/window/tour/tour_city.png");
+    background-image: url("/assets/img/window/tour/tour_city.png");
     background-size: cover;
     height: 34rem;
     background-position: bottom;
@@ -3228,7 +3225,7 @@ xxxl:   1600+
   #loading_overlay .loading-wrap .loading-container .start-buttons button::after {
     content: "";
     position: absolute;
-    background-image: url("../assets/img/start_arrow.svg");
+    background-image: url("/assets/img/start_arrow.svg");
     width: 0.9rem;
     height: 3rem;
     background-size: cover;
