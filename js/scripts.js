@@ -5,8 +5,21 @@ var phraseCarouselInterval;
         'use strict';
         startTime();
         
+        // معالجة حدث النقر على زر الإغلاق
         $(document).on('click', '.btn-close', function() {
-            $(this).closest('.window').toggleClass('hidden');
+            const win = $(this).closest('.window');
+            
+            // إخفاء النافذة
+            win.toggleClass('hidden');
+            
+            // إعادة تعيين الموقع (top, left, transform) إلى الافتراضي
+            win.css({
+                top: '',
+                left: '',
+                transform: ''
+            });
+            
+            // إذا كانت نافذة الاشتراك مخفية، أوقف الكاروسيل وأعد موضع العبارات
             if ($(".subscribe-window").hasClass("hidden")) {
                 clearInterval(phraseCarouselInterval);
                 phraseCarouselInterval = null;
@@ -14,8 +27,21 @@ var phraseCarouselInterval;
             }
         });
         
+        // معالجة حدث اللمس على زر الإغلاق (للجوال)
         $(document).on('touchend', '.btn-close', function() {
-            $(this).closest('.window').toggleClass('hidden');
+            const win = $(this).closest('.window');
+            
+            // إخفاء النافذة
+            win.toggleClass('hidden');
+            
+            // إعادة تعيين الموقع (top, left, transform) إلى الافتراضي
+            win.css({
+                top: '',
+                left: '',
+                transform: ''
+            });
+            
+            // إذا كانت نافذة الاشتراك مخفية، أوقف الكاروسيل وأعد موضع العبارات
             if ($(".subscribe-window").hasClass("hidden")) {
                 clearInterval(phraseCarouselInterval);
                 phraseCarouselInterval = null;
