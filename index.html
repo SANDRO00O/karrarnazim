@@ -28,12 +28,13 @@
 </head>
 
 <body>
+    
     <div id="chaos-loader" style="
   position: fixed;
   inset: 0;
-  background: #000;
-  color: #00ff99;
-  font-family: var(--main-font);
+  background: var(--bg-color);
+  color: #fff;
+  font-family: var(--window-title-font);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,12 +42,12 @@
   z-index: 9999999;
   padding: 2rem;
   text-align: left;
-  font-size: 1rem;
+  font-size: 1.5rem;
   line-height: 1.3rem;
 ">
-        <div id="chaos-text">waking up the website...</div>
+         <div id="chaos-text">waking up the website<span id="dots"></span></div>
     </div>
-    <!-- Loading -->
+    
     <div id="loading_unix" class="hidden">
         <div id="loading_unix_content"></div>
     </div>
@@ -133,143 +134,143 @@
     <!-- End Footer -->
     
     <!-- Copyright Window -->
-<!-- Copyright Window -->
-<!-- Copyright Window -->
-<div class="window copyright-window hidden" id="copyrightWindow">
-    <header>
-        <div class="title-bar drag-handle">
-            <div class="title">
-                <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
-                <h2>KARRARNAZIM/copyright</h2>
+    <!-- Copyright Window -->
+    <!-- Copyright Window -->
+    <div class="window copyright-window hidden" id="copyrightWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/copyright</h2>
+                </div>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
             </div>
-            <span class="btn btn-close" title="Close">
-                <a href="#">X</a>
-            </span>
-        </div>
-    </header>
-    <div class="window-content">
-        <div class="copyright">
-            <div class="copyright-content">
-                <h3>INTELLECTUAL PROPERTY NOTICE</h3>
-                
-                <div class="copyright-section">
-                    <h4>1. Site Ownership</h4>
-                    <p>
-                        &copy; 2025 Karrar Nazim. All rights reserved.
-                    </p>
-                    <p>
-                        This entire website, including all content, code, graphics, and design elements is the exclusive property of Karrar Nazim unless otherwise stated.
-                    </p>
-                </div>
-                
-                <div class="copyright-section">
-                    <h4>2. Design Inspiration</h4>
-                    <p>
-                        This website's visual design and user interface are inspired by The Strokes' official website (thestrokes.com).
-                    </p>
-                    <p>
-                        This homage is created out of artistic appreciation and is not affiliated with or endorsed by The Strokes or their representatives.
-                    </p>
-                    <p>
-                        All distinctive design elements from the original remain property of their respective owners.
-                    </p>
-                </div>
-                
-                <div class="copyright-section">
-                    <h4>3. Audio Content Disclaimer</h4>
-                    <p>
-                        The music player section contains sample tracks for demonstration purposes only:
-                    </p>
-                    <ul>
-                        <li><strong>Radiohead</strong> tracks are property of Warner Chappell Music, Inc.</li>
-                        <li><strong>My Chemical Romance</strong> tracks are property of Warner Records Inc.</li>
-                    </ul>
-                    <p>
-                        These tracks are included under fair use principles for:
-                    </p>
-                    <ul>
-                        <li>Educational demonstration of web audio capabilities</li>
-                        <li>Critical commentary on the music</li>
-                        <li>Non-commercial personal enjoyment</li>
-                    </ul>
-                    <p>
-                        No copyright infringement is intended. Users are encouraged to support the artists by purchasing official releases.
-                    </p>
-                </div>
-                
-                <div class="copyright-section">
-                    <h4>4. Visual Assets</h4>
-                    <p>
-                        All graphical elements fall under these categories:
-                    </p>
-                    <ul>
-                        <li><strong>Original creations:</strong> Custom graphics, logos, and UI elements created specifically for this site</li>
-                        <li><strong>Royalty-free assets:</strong> Licensed stock images and animations from open-source repositories</li>
-                        <li><strong>Transformative works:</strong> Modified versions of cultural artifacts used under fair use</li>
-                    </ul>
-                    <p>
-                        Any copyrighted material used remains property of its respective owners.
-                    </p>
-                </div>
-                
-                <div class="copyright-section">
-                    <h4>5. Codebase</h4>
-                    <p>
-                        The website's functionality incorporates:
-                    </p>
-                    <ul>
-                        <li>Original JavaScript and CSS written specifically for this project</li>
-                        <li>Open-source libraries (jQuery, Moment.js) under their respective licenses</li>
-                        <li>Custom implementations of web APIs</li>
-                    </ul>
-                    <p>
-                        The complete code structure and innovative solutions are protected as intellectual property.
-                    </p>
-                </div>
-                
-                <div class="copyright-section">
-                    <h4>6. Permissions & Restrictions</h4>
-                    <p><strong>Allowed:</strong></p>
-                    <ul>
-                        <li>Personal, non-commercial use</li>
-                        <li>Educational reference with proper attribution</li>
-                        <li>Fair use excerpts for commentary or review</li>
-                    </ul>
+        </header>
+        <div class="window-content">
+            <div class="copyright">
+                <div class="copyright-content">
+                    <h3>INTELLECTUAL PROPERTY NOTICE</h3>
                     
-                    <p><strong>Prohibited without written consent:</strong></p>
-                    <ul>
-                        <li>Commercial reproduction or distribution</li>
-                        <li>Creation of derivative works</li>
-                        <li>Code extraction or reuse beyond fair use</li>
-                        <li>Removal of copyright notices</li>
-                    </ul>
-                </div>
-                
-                <div class="copyright-section">
-                    <h4>7. Contact</h4>
-                    <p>
-                        For licensing inquiries or permissions please contact me
-                    </p>
-                    <p>
-                        Formal requests must include:
-                    </p>
-                    <ul>
-                        <li>Intended use case</li>
-                        <li>Requested content portion</li>
-                        <li>Duration of use</li>
-                    </ul>
-                </div>
-                
-                <div class="signature">
-                    <p>Last updated: June 2025</p>
-                    <img src="assets/img/karrar.png" alt="Official Seal" class="seal">
+                    <div class="copyright-section">
+                        <h4>1. Site Ownership</h4>
+                        <p>
+                            &copy; 2025 Karrar Nazim. All rights reserved.
+                        </p>
+                        <p>
+                            This entire website, including all content, code, graphics, and design elements is the exclusive property of Karrar Nazim unless otherwise stated.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>2. Design Inspiration</h4>
+                        <p>
+                            This website's visual design and user interface are inspired by The Strokes' official website (thestrokes.com).
+                        </p>
+                        <p>
+                            This homage is created out of artistic appreciation and is not affiliated with or endorsed by The Strokes or their representatives.
+                        </p>
+                        <p>
+                            All distinctive design elements from the original remain property of their respective owners.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>3. Audio Content Disclaimer</h4>
+                        <p>
+                            The music player section contains sample tracks for demonstration purposes only:
+                        </p>
+                        <ul>
+                            <li><strong>Radiohead</strong> tracks are property of Warner Chappell Music, Inc.</li>
+                            <li><strong>My Chemical Romance</strong> tracks are property of Warner Records Inc.</li>
+                        </ul>
+                        <p>
+                            These tracks are included under fair use principles for:
+                        </p>
+                        <ul>
+                            <li>Educational demonstration of web audio capabilities</li>
+                            <li>Critical commentary on the music</li>
+                            <li>Non-commercial personal enjoyment</li>
+                        </ul>
+                        <p>
+                            No copyright infringement is intended. Users are encouraged to support the artists by purchasing official releases.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>4. Visual Assets</h4>
+                        <p>
+                            All graphical elements fall under these categories:
+                        </p>
+                        <ul>
+                            <li><strong>Original creations:</strong> Custom graphics, logos, and UI elements created specifically for this site</li>
+                            <li><strong>Royalty-free assets:</strong> Licensed stock images and animations from open-source repositories</li>
+                            <li><strong>Transformative works:</strong> Modified versions of cultural artifacts used under fair use</li>
+                        </ul>
+                        <p>
+                            Any copyrighted material used remains property of its respective owners.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>5. Codebase</h4>
+                        <p>
+                            The website's functionality incorporates:
+                        </p>
+                        <ul>
+                            <li>Original JavaScript and CSS written specifically for this project</li>
+                            <li>Open-source libraries (jQuery, Moment.js) under their respective licenses</li>
+                            <li>Custom implementations of web APIs</li>
+                        </ul>
+                        <p>
+                            The complete code structure and innovative solutions are protected as intellectual property.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>6. Permissions & Restrictions</h4>
+                        <p><strong>Allowed:</strong></p>
+                        <ul>
+                            <li>Personal, non-commercial use</li>
+                            <li>Educational reference with proper attribution</li>
+                            <li>Fair use excerpts for commentary or review</li>
+                        </ul>
+                        
+                        <p><strong>Prohibited without written consent:</strong></p>
+                        <ul>
+                            <li>Commercial reproduction or distribution</li>
+                            <li>Creation of derivative works</li>
+                            <li>Code extraction or reuse beyond fair use</li>
+                            <li>Removal of copyright notices</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>7. Contact</h4>
+                        <p>
+                            For licensing inquiries or permissions please contact me
+                        </p>
+                        <p>
+                            Formal requests must include:
+                        </p>
+                        <ul>
+                            <li>Intended use case</li>
+                            <li>Requested content portion</li>
+                            <li>Duration of use</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="signature">
+                        <p>Last updated: June 2025</p>
+                        <img src="assets/img/karrar.png" alt="Official Seal" class="seal">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- End Copyright Window -->
-<!-- End Copyright Window -->
+    <!-- End Copyright Window -->
+    <!-- End Copyright Window -->
     
     <!-- End Copyright Window -->
     
@@ -726,39 +727,26 @@
     </script>
     
     
-    <script>
-        const chaosText = document.getElementById('chaos-text');
-        const chaosLines = [
-            "yo... hold on, the site is still putting on pants.",
-            "still booting... probably watching cat videos.",
-            "loading the pixels... very carefully.",
-            "almost there. maybe. idk.",
-            "okay okay okay... here it comes.",
-            "alright, fine. here you go."
-        ];
-        
-        let index = 0;
-        
-        function showNextLine() {
-            if (index < chaosLines.length) {
-                chaosText.innerHTML += "<br>" + chaosLines[index];
-                index++;
-                setTimeout(showNextLine, 1000);
-            }
-        }
-        
-        window.onload = () => {
-            showNextLine();
-            setTimeout(() => {
-                const loader = document.getElementById('chaos-loader');
-                loader.style.opacity = '0';
-                loader.style.transition = 'opacity 0.8s ease';
-                setTimeout(() => {
-                    loader.remove();
-                }, 1000);
-            }, chaosLines.length * 1000 + 300);
-        };
-    </script>
+<script>
+    const dots = document.getElementById('dots');
+    let dotCount = 0;
+
+    const dotInterval = setInterval(() => {
+        dotCount = (dotCount + 1) % 4; // 0 to 3
+        dots.textContent = '.'.repeat(dotCount);
+    }, 500);
+
+    window.onload = () => {
+        const loader = document.getElementById('chaos-loader');
+        loader.style.opacity = '0';
+        loader.style.transition = 'opacity 0.8s ease';
+        setTimeout(() => {
+            clearInterval(dotInterval);
+            loader.remove();
+        }, 2000); // adjust duration as needed
+    };
+</script>
+
     
     <script>
         var originalTitle = document.title;
