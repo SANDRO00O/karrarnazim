@@ -37,7 +37,13 @@ let topZIndex = 100; // لرفع كل نافذة جديدة للأعلى
         });
         
         $(document).on('click', '.time-toggle', function() {
-            openWindow('world-time-container');
+            const win = $('.world-time-container');
+            if (win.hasClass('hidden')) {
+                openWindow('world-time-container');
+            } else {
+                win.addClass('hidden');
+                win.css({ top: '', left: '', transform: '', zIndex: '' });
+            }
         });
         
         $(document).on('click', '.like-this-page', function() {
