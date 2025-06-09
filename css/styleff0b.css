@@ -66,75 +66,74 @@
   .font-loop {
     margin-top: 7rem;
     position: relative;
-    font-size: 2.6rem;
-    font-weight: bolder;
+    font-size: 1.6rem;
+    font-weight: bold;
     text-align: center;
   }
   
   /* Dino Game Window Styles */
-  .window.dino-game-window {
+.window.dino-game-window {
     max-width: 850px;
     width: 100%;
     max-height: 70vh;
-  }
-  
-  .window.dino-game-window .window-content-area {
+}
+
+.window.dino-game-window .window-content-area {
     padding: 1rem;
     display: flex;
     flex-direction: column;
     height: 400px;
-  }
-  
-  .game-instructions {
+}
+
+.game-instructions {
     background-color: #f0f0f0;
     padding: 0.8rem;
     margin-bottom: 1rem;
     border: 1px solid var(--border-color);
     text-align: center;
     font-size: 1.4rem;
-  }
-  
-  .game-instructions p {
+}
+
+.game-instructions p {
     margin: 0.5rem 0;
     color: var(--main-color);
-  }
-  
-  .window.dino-game-window iframe {
+}
+
+.window.dino-game-window iframe {
     flex-grow: 1;
     border: 2px solid var(--border-color);
     background-color: white;
-  }
-  
-  .game-footer {
+}
+
+.game-footer {
     margin-top: 1rem;
     text-align: center;
-  }
-  
-  #restartDino {
+}
+
+#restartDino {
     padding: 0.5rem 2rem;
     font-size: 1.6rem;
-  }
-  
-  /* Dino Icon */
-  body main .desktop-area nav a.icon_dino,
-  body main .desktop-area nav button.icon_dino {
-    top: 50%;
-    left: 50%;
-  }
-  
-  body main .desktop-area nav a.icon_dino::before,
-  body main .desktop-area nav button.icon_dino::before {
+}
+
+/* Dino Icon */
+body main .desktop-area nav a.icon_dino,
+body main .desktop-area nav button.icon_dino {
+    top: 45rem;
+    left: 40rem;
+}
+
+body main .desktop-area nav a.icon_dino::before,
+body main .desktop-area nav button.icon_dino::before {
     background-image: url("/assets/img/icons/dino.svg");
-  }
-  
-  @media (max-width: 768px) {
-    
+}
+
+@media (max-width: 768px) {
     body main .desktop-area nav a.icon_dino,
     body main .desktop-area nav button.icon_dino {
-      top: -30%;
-      left: 0;
+        top: -10rem;
+        left: 0;
     }
-  }
+}
   
   
   /* استيراد أنماط الموقع الأصلية */
@@ -1486,8 +1485,8 @@ xxxl:   1600+
   
   body main .desktop-area nav a.icon_music,
   body main .desktop-area nav button.icon_music {
-    top: 3%;
-    left: 2%;
+    top: 60rem;
+    left: 5rem;
   }
   
   body main .desktop-area nav a.icon_music::before,
@@ -1496,11 +1495,11 @@ xxxl:   1600+
   }
   
   @media (max-width: 768px) {
-
+    
     body main .desktop-area nav a.icon_music,
     body main .desktop-area nav button.icon_music {
-      top: -4%;
-      left: -4%;
+      top: 20rem;
+      left: 5rem;
     }
   }
   
@@ -1516,7 +1515,7 @@ xxxl:   1600+
   }
   
   @media (max-width: 768px) {
-
+    
     body main .desktop-area nav a.icon_tour,
     body main .desktop-area nav button.icon_tour {
       top: -25%;
@@ -1536,7 +1535,7 @@ xxxl:   1600+
   }
   
   @media (max-width: 768px) {
-
+    
     body main .desktop-area nav a.icon_store,
     body main .desktop-area nav button.icon_store {
       top: -30%;
@@ -1546,8 +1545,8 @@ xxxl:   1600+
   
   body main .desktop-area nav a.icon_subscribe,
   body main .desktop-area nav button.icon_subscribe {
-    top: 63%;
-    left: 67%;
+    top: 50rem;
+    left: 30rem;
   }
   
   body main .desktop-area nav a.icon_subscribe::before,
@@ -1556,18 +1555,18 @@ xxxl:   1600+
   }
   
   @media (max-width: 768px) {
-
+    
     body main .desktop-area nav a.icon_subscribe,
     body main .desktop-area nav button.icon_subscribe {
-      top: 57%;
-      left: 67%;
+      top: 20rem;
+      left: 20rem;
     }
   }
   
   body main .desktop-area nav a.icon_video,
   body main .desktop-area nav button.icon_video {
-    top: 6%;
-    left: 52%;
+    top: 80rem;
+    left: 80rem;
   }
   
   body main .desktop-area nav a.icon_video::before,
@@ -1576,18 +1575,18 @@ xxxl:   1600+
   }
   
   @media (max-width: 768px) {
-
+    
     body main .desktop-area nav a.icon_video,
     body main .desktop-area nav button.icon_video {
-      top: -20%;
-      left: 23%;
+      top: -25rem;
+      left: 0%;
     }
   }
   
   body main .desktop-area nav a.icon_screensaver,
   body main .desktop-area nav button.icon_screensaver {
-    top: 9%;
-    left: 88%;
+    top: 20rem;
+    left: 60rem;
   }
   
   body main .desktop-area nav a.icon_screensaver::before,
@@ -1596,11 +1595,11 @@ xxxl:   1600+
   }
   
   @media (max-width: 768px) {
-
+    
     body main .desktop-area nav a.icon_screensaver,
     body main .desktop-area nav button.icon_screensaver {
-      top: -81%;
-      left: 70%;
+      top: -33rem;
+      left: 20rem;
     }
   }
   
@@ -1634,7 +1633,7 @@ xxxl:   1600+
     max-width: 100%;
     display: block;
     padding: 9%;
-    
+
   }
   
   footer {
@@ -2212,7 +2211,7 @@ xxxl:   1600+
   
   
   /* تنسيقات نافذة حقوق النشر */
-  .copyright-window .copyright-content {
+.copyright-window .copyright-content {
     padding: 1rem;
     color: var(--main-color);
     font-family: var(--main-font);
@@ -2220,9 +2219,9 @@ xxxl:   1600+
     line-height: 1.6;
     max-height: 60vh;
     overflow-y: auto;
-  }
-  
-  .copyright-window h3 {
+}
+
+.copyright-window h3 {
     font-size: 2.2rem;
     text-align: center;
     margin-bottom: 2rem;
@@ -2230,53 +2229,53 @@ xxxl:   1600+
     padding-bottom: 1rem;
     text-transform: uppercase;
     font-family: var(--window-title-font);
-  }
-  
-  .copyright-window h4 {
+}
+
+.copyright-window h4 {
     font-size: 1.8rem;
     margin: 1.8rem 0 0.8rem;
     color: var(--bg-color);
     font-family: var(--window-title-font);
-  }
-  
-  .copyright-section {
+}
+
+.copyright-section {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #ddd;
-  }
-  
-  .copyright-section:last-child {
+}
+
+.copyright-section:last-child {
     border-bottom: none;
     margin-bottom: 0;
-  }
-  
-  .copyright-window p {
+}
+
+.copyright-window p {
     margin: 1rem 0;
-  }
-  
-  .copyright-window ul {
+}
+
+.copyright-window ul {
     margin: 1rem 0;
     padding-left: 2rem;
-  }
-  
-  .copyright-window li {
+}
+
+.copyright-window li {
     margin-bottom: 0.5rem;
     list-style-type: disc;
-  }
-  
-  .signature {
+}
+
+.signature {
     margin-top: 3rem;
     text-align: center;
     font-style: italic;
     border-top: 1px solid var(--bg-color);
     padding-top: 1.5rem;
-  }
-  
-  .seal {
+}
+
+.seal {
     max-width: 80px;
     opacity: 0.8;
     margin-top: 1rem;
-  }
+}
   
   
   
