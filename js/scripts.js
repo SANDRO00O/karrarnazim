@@ -98,9 +98,9 @@ let topZIndex = 100; // لرفع كل نافذة جديدة للأعلى
 // Fonts animation
 const text = document.getElementById("changing-text");
 const fonts2 = [
-    'DOSANK24', 'TimesNewCustom', 'DOSANK16', 'Screenstar',
+    'Screenstar', 'DOSANK24', 'TimesNewCustom', 'DOSANK16', 'Screenstar',
     'Tiny5', 'SixtyfourConvergence', 'PressStart2P',
-    'PixelifySans', 'VariableFont_ROND', 'CoralPixels', 'DOSANK24'
+    'PixelifySans', 'VariableFont_ROND', 'CoralPixels', 'Screenstar'
 ];
 let isPlaying2 = false;
 
