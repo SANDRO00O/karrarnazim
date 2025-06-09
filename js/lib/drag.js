@@ -7,7 +7,7 @@
             "subscribeWindow",
             "musicWindow",
             "videosWindow",
-            "screensaverWindow"
+            "dinoGameWindow"
         ];
 
         ids.forEach(id => {

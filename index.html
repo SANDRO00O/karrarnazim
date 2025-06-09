@@ -147,6 +147,9 @@
                 <a data-trigger="screensaver-window" class="win-trigger icon icon_screensaver">
                     <span>Screensaver</span>
                 </a>
+                <a data-trigger="dino-game-window" class="win-trigger icon icon_dino">
+                    <span>Dino Game</span>
+                </a>
             </nav>
             <h2 id="changing-text" class="font-loop">Hi, I'm Karrar</h2>
             
@@ -343,6 +346,11 @@
                         Who am I?
                     </span>
                 </button>
+                <button data-trigger="dino-game-window" class="win-trigger ">
+                    <span>
+                        Dino game
+                    </span>
+                </button>
             </nav>
         </header>
         <div class="window-content">
@@ -518,6 +526,11 @@
                         Who am I?
                     </span>
                 </button>
+                <button data-trigger="dino-game-window" class="win-trigger ">
+                    <span>
+                        Dino game
+                    </span>
+                </button>
             </nav>
         </header>
         <div class="window-content">
@@ -632,6 +645,11 @@
                         Who am I?
                     </span>
                 </button>
+                <button data-trigger="dino-game-window" class="win-trigger ">
+                    <span>
+                        Dino game
+                    </span>
+                </button>
             </nav>
         </header>
         <div class="window-content">
@@ -723,6 +741,63 @@
         </div>
     </div>
     <!-- End Screensaver Window -->
+    
+    <!-- Dino Game Window -->
+    <div class="window dino-game-window hidden" id="dinoGameWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/ABOUT</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger">
+                    <span>
+                        Music
+                    </span>
+                </button>
+                
+                
+                <button data-trigger="videos-window" class="win-trigger">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+                <button data-trigger="dino-game-window" class="win-trigger current-window ">
+                    <span>
+                        Dino game
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <div class="game-instructions">
+                    <p><strong>How to play:</strong> Press SPACE to jump, DOWN ARROW to duck</p>
+                    <p>Survive as long as you can!</p>
+                </div>
+                <iframe src="dino/index.html" frameborder="0"></iframe>
+                <div class="game-footer">
+                    <button id="restartDino" class="btn btn-basic">Restart Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -1056,6 +1131,35 @@
         
         // تهيئة المشغل عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', initPlayer);
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // إعادة تحميل لعبة الدينو
+            const restartBtn = document.getElementById('restartDino');
+            if (restartBtn) {
+                restartBtn.addEventListener('click', function() {
+                    const iframe = document.querySelector('.dino-game-window iframe');
+                    if (iframe) iframe.src = iframe.src;
+                });
+            }
+            
+            // إعادة ضبط حجم الإطار عند فتح النافذة
+            $(document).on('click', '[data-trigger="dino-game-window"]', function() {
+                setTimeout(function() {
+                    const iframe = document.querySelector('.dino-game-window iframe');
+                    if (iframe) iframe.style.height = (window.innerHeight * 0.5) + 'px';
+                }, 100);
+            });
+            
+            // ضبط حجم الإطار عند تغيير حجم النافذة
+            window.addEventListener('resize', function() {
+                const dinoWindow = document.querySelector('.dino-game-window');
+                const iframe = document.querySelector('.dino-game-window iframe');
+                if (dinoWindow && iframe && !dinoWindow.classList.contains('hidden')) {
+                    iframe.style.height = (window.innerHeight * 0.5) + 'px';
+                }
+            });
+        });
     </script>
 </body>
 
