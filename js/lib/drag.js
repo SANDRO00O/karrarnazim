@@ -7,7 +7,6 @@
             "subscribeWindow",
             "musicWindow",
             "videosWindow",
-            "screensaverWindow",
             "dinoGameWindow"
         ];
 
