@@ -1,348 +1,196 @@
 <!DOCTYPE html>
-
-<html lang="ar">
-
+<html lang="en">
 
 <head>
-  
-   
   <meta charset="UTF-8" />
-  
-   
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-    <title>محرر كود + ذكاء اصطناعي</title>
-  
-   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css" />
-  
-    <style>
-    body,
-    
-    html {
-      
-      margin: 0;
-      
-      padding: 0;
-      
-      height: 100%;
-      
-      background: #121212;
-      
-      color: #eee;
-      
-      font-family: sans-serif;
-      
-    }
-    
-    
-    
-    header {
-      
-      padding: 10px;
-      
-      background: #222;
-      
-      text-align: center;
-      
-      font-size: 1.2rem;
-      
-    }
-    
-    
-    
-    #editor {
-      
-      height: 50vh;
-      
-    }
-    
-    
-    
-    textarea,
-    
-    pre,
-    
-    button,
-    
-    input {
-      
-      border: none;
-      
-      border-radius: 5px;
-      
-      font-size: 1rem;
-      
-    }
-    
-    
-    
-    #aiBox {
-      
-      height: 20vh;
-      
-      overflow-y: auto;
-      
-      background: #111;
-      
-      margin: 10px;
-      
-      padding: 10px;
-      
-      white-space: pre-wrap;
-      
-      border: 1px solid #333;
-      
-    }
-    
-    
-    
-    #output {
-      
-      background: #000;
-      
-      color: #0f0;
-      
-      padding: 10px;
-      
-      height: 15vh;
-      
-      overflow-y: auto;
-      
-    }
-    
-    
-    
-    #controls {
-      
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walkie Talkie</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <style>
+    body {
+      background: #202124;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
-      
-      gap: 10px;
-      
-      padding: 10px;
-      
-      flex-wrap: wrap;
-      
       justify-content: center;
-      
-      background: #333;
-      
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
     
-    
-    
-    button {
-      
-      background: #444;
-      
-      color: #eee;
-      
-      padding: 10px;
-      
-      cursor: pointer;
-      
+    .walkie {
+      background: #2b2b2b;
+      width: 260px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     
-    
-    
-    button:hover {
-      
+    .antenna {
+      height: 60px;
+      width: 6px;
       background: #555;
-      
+      margin-bottom: 10px;
+      border-radius: 3px;
     }
     
-    
-    
-    #msgInput {
-      
-      width: 60%;
-      
+    .screen {
+      width: 100%;
+      background: #111;
+      color: #0f0;
+      border: 2px solid #0f0;
       padding: 10px;
-      
-      background: #1a1a1a;
-      
-      color: #eee;
-      
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    
+    .freq-input {
+      width: 80%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      background: #000;
+      color: #0f0;
+      text-align: center;
+    }
+    
+    .tune-btn,
+    .talk-btn {
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 10px;
+      width: 90%;
+      margin: 5px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .talk-btn:active {
+      background: red;
+      color: white;
     }
   </style>
-  
 </head>
 
-
 <body>
-  
-    <header>🧠 محرر كود + تصحيح + ذكاء اصطناعي</header>
-  
-    <div id="editor"></div>
-  
-    <div id="controls">
+  <div class="walkie">
+    <div class="antenna"></div>
+    <div class="screen">
+      Frequency: <span id="freqDisplay">---</span><br>
+      Status: <span id="status">Disconnected</span>
+    </div>
+    <input class="freq-input" type="text" id="freqInput" placeholder="Enter Freq (e.g. 93.5)">
+    <button class="tune-btn" id="tune">Tune In</button>
+    <button class="talk-btn" id="talk">Push to Talk</button>
+    <audio id="remoteAudio" autoplay></audio>
+  </div>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDtv3drt0TvgqFYX3VcNAG5X3HyNGiswkE",
+      authDomain: "jjaj-ad4bf.firebaseapp.com",
+      databaseURL: "https://jjaj-ad4bf-default-rtdb.firebaseio.com",
+      projectId: "jjaj-ad4bf",
+      storageBucket: "jjaj-ad4bf.firebasestorage.app",
+      messagingSenderId: "726506035735",
+      appId: "1:726506035735:web:3930ece4d32146094bda52",
+      measurementId: "G-SXMYTMX0M9"
+    };
     
-        <button id="runBtn">▶️ تشغيل</button>
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    firebase.auth().signInAnonymously();
     
-        <button id="fixBtn">🛠️ تصحيح</button>
+    const statusEl = document.getElementById("status");
+    const remoteAudio = document.getElementById("remoteAudio");
+    const tuneBtn = document.getElementById("tune");
+    const talkBtn = document.getElementById("talk");
+    const freqInput = document.getElementById("freqInput");
+    const freqDisplay = document.getElementById("freqDisplay");
     
-        <button id="micBtn">🎤 تحدث</button>
-    
-      </div>
-  
-    <div id="aiBox">💬 رد الذكاء الاصطناعي سيظهر هنا</div>
-  
-    <div style="display: flex; gap: 10px; padding: 0 10px 10px;">
-    
-        <input type="text" id="msgInput" placeholder="اكتب سؤال للذكاء الاصطناعي..." />
-    
-        <button id="askBtn">🧠 إرسال</button>
-    
-      </div>
-  
-   
-  <pre id="output"></pre>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"></script>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
-  
-    <script>
-    const editor = CodeMirror(document.getElementById("editor"), {
-      
-      lineNumbers: true,
-      
-      mode: "htmlmixed",
-      
-      theme: "default",
-      
-      tabSize: 2
-      
+    let pc = new RTCPeerConnection({
+      iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
     });
+    let localStream;
     
+    pc.ontrack = (event) => {
+      remoteAudio.srcObject = event.streams[0];
+    };
     
+    async function getMediaAndAddTracks() {
+      localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+    }
     
-    document.getElementById("runBtn").onclick = () => {
-      
-      const output = document.getElementById("output");
-      
-      try {
-        
-        const blob = new Blob([editor.getValue()], { type: "text/html" });
-        
-        const url = URL.createObjectURL(blob);
-        
-        window.open(url);
-        
-      } catch (e) {
-        
-        output.textContent = "خطأ: " + e.message;
-        
+    tuneBtn.onclick = async () => {
+      const freq = freqInput.value.trim().replace(/\s+/g, '').replace('.', '-');
+      if (!freq) {
+        alert("Please enter a frequency!");
+        return;
       }
       
-    };
-    
-    
-    
-    document.getElementById("fixBtn").onclick = async () => {
+      freqDisplay.innerText = freqInput.value.trim();
+      const roomId = `freq-${freq}`;
+      const roomRef = db.ref(`rooms/${roomId}`);
       
-      const code = editor.getValue();
+      statusEl.innerText = "Tuning...";
+      await getMediaAndAddTracks();
       
-      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBRV_bpPK-Ez1NZ9UjDSyeoPGiVVI2l3ts", {
+      const offerSnap = await roomRef.child("offer").get();
+      if (offerSnap.exists()) {
+        const offer = JSON.parse(offerSnap.val());
+        await pc.setRemoteDescription(new RTCSessionDescription(offer));
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        await roomRef.child("answer").set(JSON.stringify(answer));
+        statusEl.innerText = `Connected on ${freq} MHz`;
+      } else {
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        await roomRef.child("offer").set(JSON.stringify(offer));
+        statusEl.innerText = `Broadcasting on ${freq} MHz`;
         
-        method: "POST",
-        
-        headers: { "Content-Type": "application/json" },
-        
-        body: JSON.stringify({ contents: [{ parts: [{ text: "صحح هذا الكود ارجع فقط الكود بدون شرح او نجوم الخ ارجع بكود html css js فقط لا تستخدم الرموز التي هي مميزة هو: \n" + code }] }] })
-        
+        roomRef.child("answer").on('value', async (snapshot) => {
+          const answer = snapshot.val();
+          if (answer && !pc.currentRemoteDescription) {
+            await pc.setRemoteDescription(new RTCSessionDescription(JSON.parse(answer)));
+            statusEl.innerText = `Connected on ${freq} MHz`;
+          }
+        });
+      }
+      
+      roomRef.child("candidates").on('child_added', async (snapshot) => {
+        const candidate = new RTCIceCandidate(JSON.parse(snapshot.val()));
+        await pc.addIceCandidate(candidate);
       });
       
-      const data = await res.json();
-      
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "❌ لم يتم الحصول على رد";
-      
-      document.getElementById("aiBox").textContent = reply;
-      
+      pc.onicecandidate = (event) => {
+        if (event.candidate) {
+          roomRef.child("candidates").push(JSON.stringify(event.candidate));
+        }
+      };
     };
     
-    
-    
-    document.getElementById("askBtn").onclick = async () => {
-      
-      const msg = document.getElementById("msgInput").value;
-      
-      const memory = localStorage.getItem("aiMemory") || "";
-      
-      const fullPrompt = memory + "\nالمستخدم: " + msg;
-      
-      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBRV_bpPK-Ez1NZ9UjDSyeoPGiVVI2l3ts", {
-        
-        method: "POST",
-        
-        headers: { "Content-Type": "application/json" },
-        
-        body: JSON.stringify({ contents: [{ parts: [{ text: fullPrompt }] }] })
-        
-      });
-      
-      const data = await res.json();
-      
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "❌ لم يتم الرد";
-      
-      document.getElementById("aiBox").textContent = reply;
-      
-      localStorage.setItem("aiMemory", fullPrompt + "\nالذكاء الاصطناعي: " + reply);
-      
-      document.getElementById("msgInput").value = "";
-      
+    // Push-to-Talk
+    let micOn = false;
+    talkBtn.onmousedown = async () => {
+      if (!localStream) return;
+      localStream.getAudioTracks().forEach(track => track.enabled = true);
     };
-    
-    
-    
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    
-    let micActive = false;
-    
-    if (SpeechRecognition) {
-      
-      const rec = new SpeechRecognition();
-      
-      rec.lang = "ar-IQ";
-      
-      rec.continuous = true;
-      
-      rec.onresult = e => {
-        
-        const text = Array.from(e.results).map(r => r[0].transcript).join(" ");
-        
-        document.getElementById("msgInput").value = text;
-        
-      };
-      
-      document.getElementById("micBtn").onclick = () => {
-        
-        if (micActive) {
-          rec.stop();
-          
-          micActive = false;
-        }
-        
-        else {
-          rec.start();
-          
-          micActive = true;
-        }
-        
-      };
-      
-    } else {
-      
-      document.getElementById("micBtn").style.display = "none";
-      
-    }
+    talkBtn.onmouseup = () => {
+      if (!localStream) return;
+      localStream.getAudioTracks().forEach(track => track.enabled = false);
+    };
   </script>
-  
 </body>
-
 
 </html>
