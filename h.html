@@ -1,27 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Walkie Talkie</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>محرر كود مشترك + AI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css" />
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #111;
+      color: #eee;
+      font-family: sans-serif;
+    }
+    
+    header {
+      padding: 10px;
+      background: #222;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    
+    #editor {
+      height: 50vh;
+    }
+    
+    #aiBox,
+    #output {
+      margin: 10px;
+      padding: 10px;
+      background: #000;
+      color: #0f0;
+      height: 15vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      border: 1px solid #333;
+    }
+    
+    #controls,
+    #chatRow {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #222;
+    }
+    
+    button {
+      background: #333;
+      color: #eee;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background: #444;
+    }
+    
+    #msgInput {
+      flex: 1;
+      padding: 10px;
+      background: #1a1a1a;
+      color: #eee;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
 </head>
-<body>
-  <div class="walkie">
-    <div class="antenna"></div>
-    <div class="screen">
-      Frequency: <span id="freqDisplay">---</span><br>
-      Status: <span id="status">Disconnected</span>
-    </div>
-    <input class="freq-input" type="text" id="freqInput" placeholder="Enter Freq (e.g. 93.5)">
-    <button class="tune-btn" id="tune">Tune In</button>
-    <button class="talk-btn" id="talk">Push to Talk</button>
-    <audio id="remoteAudio" autoplay></audio>
-  </div>
 
-  <script src="script.js"></script>
+<body>
+  <header>🔥 محرر مشترك + Gemini AI + ميكروفون</header>
+  <div id="editor"></div>
+  <div id="controls">
+    <button id="runBtn">▶️ تشغيل</button>
+    <button id="fixBtn">🛠️ تصحيح</button>
+    <button id="micBtn">🎤 تحدث</button>
+  </div>
+  <div id="aiBox">🤖 رد الذكاء الاصطناعي هنا</div>
+  <div id="chatRow">
+    <input type="text" id="msgInput" placeholder="🧠 اكتب سؤالك للذكاء الاصطناعي..." />
+    <button id="askBtn">إرسال</button>
+  </div>
+  <div id="output"></div>
+  
+  <!-- الأكواد -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB3ZdO2aPo8D-au1pnQTSRf6KuMa44KkFk",
+      authDomain: "code-co1de.firebaseapp.com",
+      databaseURL: "https://code-co1de-default-rtdb.firebaseio.com",
+      projectId: "code-co1de",
+      storageBucket: "code-co1de.appspot.com",
+      messagingSenderId: "1016659302353",
+      appId: "1:1016659302353:web:71c653f2a522f957ae72f0"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const ref = db.ref("/sharedCode");
+    
+    const editor = CodeMirror(document.getElementById("editor"), {
+      lineNumbers: true,
+      mode: "htmlmixed",
+      theme: "default",
+      tabSize: 2
+    });
+    
+    // تزامن مباشر بين المستخدمين
+    ref.on("value", (snapshot) => {
+      const data = snapshot.val() || "";
+      if (editor.getValue() !== data) editor.setValue(data);
+    });
+    
+    editor.on("change", () => {
+      ref.set(editor.getValue());
+    });
+    
+    // تشغيل الكود في صفحة منفصلة
+    document.getElementById("runBtn").onclick = () => {
+      const blob = new Blob([editor.getValue()], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      window.open(url, "_blank");
+    };
+    
+    // تصحيح الكود
+    document.getElementById("fixBtn").onclick = async () => {
+      const code = editor.getValue();
+      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyBRV_bpPK-Ez1NZ9UjDSyeoPGiVVI2l3ts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: [{ parts: [{ text: "صحح هذا الكود: \n" + code }] }] })
+      });
+      const data = await res.json();
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "❌ لم يتم الرد";
+      document.getElementById("aiBox").textContent = reply;
+    };
+    
+    // المحادثة مع الذكاء الاصطناعي
+    document.getElementById("askBtn").onclick = async () => {
+      const msg = document.getElementById("msgInput").value;
+      const history = localStorage.getItem("aiMemory") || "";
+      const prompt = history + "\nالمستخدم: " + msg;
+      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBRV_bpPK-Ez1NZ9UjDSyeoPGiVVI2l3ts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      });
+      const data = await res.json();
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "❌ لم يتم الرد";
+      document.getElementById("aiBox").textContent = reply;
+      localStorage.setItem("aiMemory", prompt + "\nالذكاء الاصطناعي: " + reply);
+      document.getElementById("msgInput").value = "";
+    };
+    
+    // الميكروفون
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const rec = new SpeechRecognition();
+      rec.lang = "ar-IQ";
+      rec.continuous = false;
+      rec.onresult = e => {
+        const text = e.results[0][0].transcript;
+        document.getElementById("msgInput").value = text;
+      };
+      document.getElementById("micBtn").onclick = () => {
+        rec.start();
+      };
+    } else {
+      document.getElementById("micBtn").style.display = "none";
+    }
+  </script>
 </body>
+
 </html>
