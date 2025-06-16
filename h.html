@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="ar">
+
+
+<head>
+  
+   
+  <meta charset="UTF-8" />
+  
+   
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+    <title>محرر كود + ذكاء اصطناعي</title>
+  
+   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css" />
+  
+    <style>
+    body,
+    
+    html {
+      
+      margin: 0;
+      
+      padding: 0;
+      
+      height: 100%;
+      
+      background: #121212;
+      
+      color: #eee;
+      
+      font-family: sans-serif;
+      
+    }
+    
+    
+    
+    header {
+      
+      padding: 10px;
+      
+      background: #222;
+      
+      text-align: center;
+      
+      font-size: 1.2rem;
+      
+    }
+    
+    
+    
+    #editor {
+      
+      height: 50vh;
+      
+    }
+    
+    
+    
+    textarea,
+    
+    pre,
+    
+    button,
+    
+    input {
+      
+      border: none;
+      
+      border-radius: 5px;
+      
+      font-size: 1rem;
+      
+    }
+    
+    
+    
+    #aiBox {
+      
+      height: 20vh;
+      
+      overflow-y: auto;
+      
+      background: #111;
+      
+      margin: 10px;
+      
+      padding: 10px;
+      
+      white-space: pre-wrap;
+      
+      border: 1px solid #333;
+      
+    }
+    
+    
+    
+    #output {
+      
+      background: #000;
+      
+      color: #0f0;
+      
+      padding: 10px;
+      
+      height: 15vh;
+      
+      overflow-y: auto;
+      
+    }
+    
+    
+    
+    #controls {
+      
+      display: flex;
+      
+      gap: 10px;
+      
+      padding: 10px;
+      
+      flex-wrap: wrap;
+      
+      justify-content: center;
+      
+      background: #333;
+      
+    }
+    
+    
+    
+    button {
+      
+      background: #444;
+      
+      color: #eee;
+      
+      padding: 10px;
+      
+      cursor: pointer;
+      
+    }
+    
+    
+    
+    button:hover {
+      
+      background: #555;
+      
+    }
+    
+    
+    
+    #msgInput {
+      
+      width: 60%;
+      
+      padding: 10px;
+      
+      background: #1a1a1a;
+      
+      color: #eee;
+      
+    }
+  </style>
+  
+</head>
+
+
+<body>
+  
+    <header>🧠 محرر كود + تصحيح + ذكاء اصطناعي</header>
+  
+    <div id="editor"></div>
+  
+    <div id="controls">
+    
+        <button id="runBtn">▶️ تشغيل</button>
+    
+        <button id="fixBtn">🛠️ تصحيح</button>
+    
+        <button id="micBtn">🎤 تحدث</button>
+    
+      </div>
+  
+    <div id="aiBox">💬 رد الذكاء الاصطناعي سيظهر هنا</div>
+  
+    <div style="display: flex; gap: 10px; padding: 0 10px 10px;">
+    
+        <input type="text" id="msgInput" placeholder="اكتب سؤال للذكاء الاصطناعي..." />
+    
+        <button id="askBtn">🧠 إرسال</button>
+    
+      </div>
+  
+   
+  <pre id="output"></pre>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
+  
+    <script>
+    const editor = CodeMirror(document.getElementById("editor"), {
+      
+      lineNumbers: true,
+      
+      mode: "htmlmixed",
+      
+      theme: "default",
+      
+      tabSize: 2
+      
+    });
+    
+    
+    
+    document.getElementById("runBtn").onclick = () => {
+      
+      const output = document.getElementById("output");
+      
+      try {
+        
+        const blob = new Blob([editor.getValue()], { type: "text/html" });
+        
+        const url = URL.createObjectURL(blob);
+        
+        window.open(url);
+        
+      } catch (e) {
+        
+        output.textContent = "خطأ: " + e.message;
+        
+      }
+      
+    };
+    
+    
+    
+    document.getElementById("fixBtn").onclick = async () => {
+      
+      const code = editor.getValue();
+      
+      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBRV_bpPK-Ez1NZ9UjDSyeoPGiVVI2l3ts", {
+        
+        method: "POST",
+        
+        headers: { "Content-Type": "application/json" },
+        
+        body: JSON.stringify({ contents: [{ parts: [{ text: "صحح هذا الكود ارجع فقط الكود بدون شرح او نجوم الخ ارجع بكود html css js فقط لا تستخدم الرموز التي هي مميزة هو: \n" + code }] }] })
+        
+      });
+      
+      const data = await res.json();
+      
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "❌ لم يتم الحصول على رد";
+      
+      document.getElementById("aiBox").textContent = reply;
+      
+    };
+    
+    
+    
+    document.getElementById("askBtn").onclick = async () => {
+      
+      const msg = document.getElementById("msgInput").value;
+      
+      const memory = localStorage.getItem("aiMemory") || "";
+      
+      const fullPrompt = memory + "\nالمستخدم: " + msg;
+      
+      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBRV_bpPK-Ez1NZ9UjDSyeoPGiVVI2l3ts", {
+        
+        method: "POST",
+        
+        headers: { "Content-Type": "application/json" },
+        
+        body: JSON.stringify({ contents: [{ parts: [{ text: fullPrompt }] }] })
+        
+      });
+      
+      const data = await res.json();
+      
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "❌ لم يتم الرد";
+      
+      document.getElementById("aiBox").textContent = reply;
+      
+      localStorage.setItem("aiMemory", fullPrompt + "\nالذكاء الاصطناعي: " + reply);
+      
+      document.getElementById("msgInput").value = "";
+      
+    };
+    
+    
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    let micActive = false;
+    
+    if (SpeechRecognition) {
+      
+      const rec = new SpeechRecognition();
+      
+      rec.lang = "ar-IQ";
+      
+      rec.continuous = true;
+      
+      rec.onresult = e => {
+        
+        const text = Array.from(e.results).map(r => r[0].transcript).join(" ");
+        
+        document.getElementById("msgInput").value = text;
+        
+      };
+      
+      document.getElementById("micBtn").onclick = () => {
+        
+        if (micActive) {
+          rec.stop();
+          
+          micActive = false;
+        }
+        
+        else {
+          rec.start();
+          
+          micActive = true;
+        }
+        
+      };
+      
+    } else {
+      
+      document.getElementById("micBtn").style.display = "none";
+      
+    }
+  </script>
+  
+</body>
+
+
+</html>
