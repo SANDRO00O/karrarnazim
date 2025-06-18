@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARRAR NAZIM</title>
+    <meta name="description" content="I'm Karar, a web developer since 2022. I chose this path because life didn’t give me a better option. I build websites that reflect me: sometimes chaotic, sometimes brilliant, and they mostly work.">
+    <meta property="og:title" content="KARRAR NAZIM">
+    
+    <meta name="og:description" content="I'm Karar, a web developer since 2022. I chose this path because life didn’t give me a better option. I build websites that reflect me: sometimes chaotic, sometimes brilliant, and they mostly work.">
+    <!-- OG -->
+    <meta property="og:url" content="https://karrarnazim.netlify.app">
+    <meta property="og:description" content="KARRAR NAZIM">
+    <meta property="og:type" content="about">
+    <meta property="og:image" content="assets/img/mainfav.png">
+    
+    <meta name="twitter:title" content="KARRAR NAZIM">
+    <meta name="twitter:image" content="assets/img/mainfav.png">
+    
+    <link rel="icon" href="/assets/img/icons/fav.png">
+    
+    <!-- Fontawesome -->
+    <script src="../kit.fontawesome.com/f55a23c83c.html" crossorigin="anonymous"></script>
+    <link rel="stylesheet" id="css-library" href="css/styleff0b.css?rev=19" media="all">
+    
+</head>
+
+<body>
+    
+    <style>
+        body.chaos-loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+    </style>
+    
+    <div id="chaos-loader" style="
+  position: fixed;
+  inset: 0;
+  background: var(--bg-color);
+  color: #fff;
+  font-family: var(--window-title-font);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999999;
+  padding: 2rem;
+  text-align: left;
+  font-size: 1.5rem;
+  line-height: 1.3rem;
+">
+        <div id="chaos-text">waking up the website<span id="dots">...</span></div>
+    </div>
+    
+    <script>
+        // إضافة كلاس التحميل للجسم
+        document.body.classList.add('chaos-loading');
+        
+        const dots = document.getElementById('dots');
+        let dotCount = 0;
+        let dotInterval;
+        
+        // بدء الرسوم المتحركة فور تحميل DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            dotInterval = setInterval(() => {
+                dotCount = (dotCount + 1) % 4;
+                dots.textContent = '.'.repeat(dotCount);
+            }, 500);
+            
+            // إخفاء اللودر عند اكتمال تحميل الصفحة
+            window.addEventListener('load', () => {
+                const loader = document.getElementById('chaos-loader');
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.8s ease';
+                
+                setTimeout(() => {
+                    clearInterval(dotInterval);
+                    loader.remove();
+                    document.body.classList.remove('chaos-loading');
+                }, 2000);
+            });
+        });
+    </script>
+    
+    <div id="loading_overlay" class="">
+        <div class="loading-wrap">
+            <div class="loading-container">
+                <img src="assets/img/loading/karrarnazim.gif" alt="Loading">
+                <div class="start-buttons">
+                    <button onclick="enterSite()">
+                        Enter site
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Loading End -->
+    
+    <!-- Main -->
+    <main>
+        <div class="nav-bar-container">
+            <div class="nav-bar nav-left">
+                
+                <button class="btn btn-basic is-uppercase" onclick="playLoop2()">
+                    KARRAR NAZIM
+                </button>
+                
+            </div>
+            <div class="nav-bar nav-right">
+                <button class="time-toggle btn btn-basic">
+                    <span id="current-time"></span>
+                </button>
+                <div class="world-time-container hidden">
+                    <button class="time-iq btn btn-basic">
+                        <img src="assets/img/flags/iq.png" alt=""><span id="current-iq"></span>
+                    </button>
+                    <button class="time-us btn btn-basic">
+                        <img src="assets/img/flags/us.png" alt=""><span id="current-us"></span>
+                    </button>
+                    <button class="time-uk btn btn-basic">
+                        <img src="assets/img/flags/uk.png" alt=""><span id="current-uk"></span>
+                    </button>
+                    <button class="time-jp btn btn-basic">
+                        <img src="assets/img/flags/jp.png" alt=""><span id="current-jp"></span>
+                    </button>
+                </div>
+                <a class="btn btn-basic nav-copyright">
+                    ©
+                </a>
+            </div>
+        </div>
+        <div class="desktop-area">
+            <nav>
+                <a data-trigger="music-window" class="win-trigger icon icon_music">
+                    <span>Music</span>
+                </a>
+                
+                <a data-trigger="subscribe-window" class="win-trigger icon icon_subscribe">
+                    <span>Who am I?</span>
+                </a>
+                <a data-trigger="videos-window" class="win-trigger icon icon_video">
+                    <span>My Projects</span>
+                </a>
+                <a data-trigger="screensaver-window" class="win-trigger icon icon_screensaver">
+                    <span>Screensaver</span>
+                </a>
+                <a data-trigger="dino-game-window" class="win-trigger icon icon_dino">
+                    <span>Dino Game</span>
+                </a>
+            </nav>
+            <h2 id="changing-text" class="font-loop">Hi, I'm Karrar</h2>
+            
+        </div>
+        
+    </main>
+    <!-- Main End -->
+    
+    <!-- Footer -->
+    <footer>
+        <div class="content" style="text-align: center;">
+            <p>
+                Karrar Nazim <span class="current-year"></span>&copy; |
+                All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+    <!-- End Footer -->
+    
+    <!-- Copyright Window -->
+    <!-- Copyright Window -->
+    <!-- Copyright Window -->
+    <div class="window copyright-window hidden" id="copyrightWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/COPYRIGHT</h2>
+                </div>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+        </header>
+        <div class="window-content">
+            <div class="copyright">
+                <div class="copyright-content">
+                    <h3>INTELLECTUAL PROPERTY NOTICE</h3>
+                    
+                    <div class="copyright-section">
+                        <h4>1. Site Ownership</h4>
+                        <p>
+                            &copy; <span class="current-year"></span> Karrar Nazim. All rights reserved.
+                        </p>
+                        <p>
+                            This entire website, including all content, code, graphics, and design elements is the exclusive property of Karrar Nazim unless otherwise stated.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>2. Design Inspiration</h4>
+                        <p>
+                            This website's visual design and user interface are inspired by The Strokes' official website (thestrokes.com).
+                        </p>
+                        <p>
+                            This homage is created out of artistic appreciation and is not affiliated with or endorsed by The Strokes or their representatives.
+                        </p>
+                        <p>
+                            All distinctive design elements from the original remain property of their respective owners.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>3. Audio Content Disclaimer</h4>
+                        <p>
+                            The music player section contains sample tracks for demonstration purposes only:
+                        </p>
+                        <ul>
+                            <li><strong>Radiohead</strong> tracks are property of Warner Chappell Music, Inc.</li>
+                            <li><strong>My Chemical Romance</strong> tracks are property of Warner Records Inc.</li>
+                        </ul>
+                        <p>
+                            These tracks are included under fair use principles for:
+                        </p>
+                        <ul>
+                            <li>Educational demonstration of web audio capabilities</li>
+                            <li>Critical commentary on the music</li>
+                            <li>Non-commercial personal enjoyment</li>
+                        </ul>
+                        <p>
+                            No copyright infringement is intended. Users are encouraged to support the artists by purchasing official releases.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>4. Visual Assets</h4>
+                        <p>
+                            All graphical elements fall under these categories:
+                        </p>
+                        <ul>
+                            <li><strong>Original creations:</strong> Custom graphics, logos, and UI elements created specifically for this site</li>
+                            <li><strong>Royalty-free assets:</strong> Licensed stock images and animations from open-source repositories</li>
+                            <li><strong>Transformative works:</strong> Modified versions of cultural artifacts used under fair use</li>
+                        </ul>
+                        <p>
+                            Any copyrighted material used remains property of its respective owners.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>5. Codebase</h4>
+                        <p>
+                            The website's functionality incorporates:
+                        </p>
+                        <ul>
+                            <li>Original JavaScript and CSS written specifically for this project</li>
+                            <li>Open-source libraries (jQuery, Moment.js) under their respective licenses</li>
+                            <li>Custom implementations of web APIs</li>
+                        </ul>
+                        <p>
+                            The complete code structure and innovative solutions are protected as intellectual property.
+                        </p>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>6. Permissions & Restrictions</h4>
+                        <p><strong>Allowed:</strong></p>
+                        <ul>
+                            <li>Personal, non-commercial use</li>
+                            <li>Educational reference with proper attribution</li>
+                            <li>Fair use excerpts for commentary or review</li>
+                        </ul>
+                        
+                        <p><strong>Prohibited without written consent:</strong></p>
+                        <ul>
+                            <li>Commercial reproduction or distribution</li>
+                            <li>Creation of derivative works</li>
+                            <li>Code extraction or reuse beyond fair use</li>
+                            <li>Removal of copyright notices</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="copyright-section">
+                        <h4>7. Contact</h4>
+                        <p>
+                            For licensing inquiries or permissions please contact me
+                        </p>
+                        <p>
+                            Formal requests must include:
+                        </p>
+                        <ul>
+                            <li>Intended use case</li>
+                            <li>Requested content portion</li>
+                            <li>Duration of use</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="signature">
+                        <p>Last updated: June <span class="current-year"></span></p>
+                        <img src="assets/img/karrar.png" alt="Official Seal" class="seal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Copyright Window -->
+    <!-- End Copyright Window -->
+    
+    <!-- End Copyright Window -->
+    
+    <!-- Subscribe Window -->
+    <div class="window subscribe-window hidden" id="subscribeWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/ABOUT</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger">
+                    <span>
+                        Music
+                    </span>
+                </button>
+                
+                
+                <button data-trigger="videos-window" class="win-trigger">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger current-window ">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+                <button data-trigger="dino-game-window" class="win-trigger ">
+                    <span>
+                        Dino game
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <div class="window-content-header">
+                    <img src="assets/img/window/world.webp" alt="World">
+                    <div class="success-message hidden">
+                    </div>
+                </div>
+                <div class="signup-container">
+                    <div class="questions-container">
+                        <div class="signup-for-answers-header">
+                            About me
+                        </div>
+                        <div class="signup-for-answers-answers">
+                            <div class="scrolling-phrase-items">
+                                <span class="scrolling-phrase-slide">Who the Hell Am I?</span>
+                                <span class="scrolling-phrase-slide">idk</span>
+                                <span class="scrolling-phrase-slide">cool</span>
+                                <span class="scrolling-phrase-slide">What I Actually Do</span>
+                                <span class="scrolling-phrase-slide">My So-Called Projects</span>
+                                <span class="scrolling-phrase-slide">Wanna Talk?</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signup-disclaimer">
+                        <img src="assets/img/karrar.png" alt="The Strokes">
+                        <p>
+                            <b>
+                                1. Who the Hell Am I?
+                            </b>
+                        </p>
+                        <p>
+                            
+                            I'm Karar — just another dude who talks to machines better than people. I build websites because breaking the internet is apparently frowned upon. Been writing code since forever (well, since 2022, but close enough). HTML, CSS, JS, React, php — yeah, I speak all that nerdy stuff. If you're here looking for a "professional" bio full of buzzwords... you're in the wrong corner of the internet, my friend.
+                        </p>
+                        <p>
+                            <b>
+                                2. What I Actually Do (Besides Crying at 3AM Debugging)
+                            </b>
+                        </p>
+                        <p>
+                            Build Stuff from Scratch
+                            Websites, portfolios, dashboards, your aunt’s bakery page — whatever. I make pixels behave.
+                            
+                            Make Ugly Things Pretty
+                            UI design that doesn’t make your eyes bleed. You're welcome.
+                            
+                            Speed Things Up
+                            I slap the lazy out of slow websites. And yes, Google loves that.
+                            
+                            Fix Things I Probably Didn’t Break
+                            Maintenance and updates. I’ll even pretend to care.
+                        </p>
+                        <p>
+                            <b>
+                                3. My So-Called Projects
+                            </b>
+                        </p>
+                        <p>
+                            I've made some pretty cool stuff. Some of it even works.
+                            Portfolios, e-commerce sites, landing pages, random experiments at 2AM that somehow ended up on the internet. Click around if you're bored — maybe you'll find something that doesn't suck.
+                        </p>
+                        <p>
+                            <b>
+                                4. Wanna Talk? Why Though?
+                            </b>
+                        </p>
+                        <p>
+                            Got an idea? Want a website? Or just bored and stalking devs?
+                            Contact me to see what I can do.
+                        </p>
+                        
+                    </div>
+                    
+                    
+                    <div class="signup-form-container">
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name" class="sr-only">Name</label>
+                                <input id="name" name="name" type="text" required placeholder="Your Name" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="sr-only">Email Address</label>
+                                <input id="email" name="email" type="email" required placeholder="Your Email Address" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="sr-only">Subject</label>
+                                <input id="subject" name="subject" type="text" required placeholder="Your Subject" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="sr-only">Message</label>
+                                <textarea id="message" name="message" required placeholder="Your Message"></textarea>
+                            </div>
+                            <div class="g-recaptcha" data-sitekey="6LeBCVIrAAAAAEkYQYK2beyqmHv_k00QTQPYyg2H"></div>
+                            <button type="submit" class="submit-buttonms">Submit</button>
+                            <p class="status-msg" id="status-message"></p>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+                
+                <div class="social-container">
+                    <div class="social-header">
+                        other Contact
+                    </div>
+                    <div class="social">
+                        <a href="https://www.instagram.com/kr_j.p" target="_blank" rel="noopener">
+                            instagram
+                        </a>
+                        <a href="https://t.me/kaarrar" target="_blank" rel="noopener">
+                            Telegram
+                        </a>
+                        
+                    </div>
+                </div>
+                
+                <div class="like-this-page-container">
+                    <img src="assets/img/window/like_this_page.webp" class="like-this-page" alt="Like this page?">
+                    <img src="assets/img/window/disco_comp.gif" alt="Mirror ball" class="mirror-ball hidden">
+                </div>
+                
+                <div class="window-footer">
+                    <div class="content">
+                        <p>
+                            Karrar Nazim <span class="current-year"></span>&copy; |
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End Subscribe Window -->
+    
+    <!-- Music Window -->
+    <div class="window music-window hidden" id="musicWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/MUSIC</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger current-window">
+                    <span>
+                        Music
+                    </span>
+                </button>
+                
+                <button data-trigger="videos-window" class="win-trigger">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+                <button data-trigger="dino-game-window" class="win-trigger ">
+                    <span>
+                        Dino game
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <div class="window-content-header">
+                    <h2>
+                        Music
+                    </h2>
+                    <img src="assets/img/window/music/treblerotate1.gif" alt="Treble" class="treble-left">
+                    <img src="assets/img/window/music/radior.gif" alt="Small speaker" class="small-speaker-left">
+                    <img src="assets/img/window/music/speakers.gif" alt="Large speaker" class="large-speaker-left">
+                    <img src="assets/img/window/music/listen.gif" alt="Listen" class="listen">
+                    <img src="assets/img/window/music/speakers.gif" alt="Large speaker" class="large-speaker-right">
+                    <img src="assets/img/window/music/radior.gif" alt="Small speaker" class="small-speaker-right">
+                    <img src="assets/img/window/music/treblerotate1.gif" alt="Treble" class="treble-right">
+                    <img src="assets/img/window/music/elephant_ear.gif" alt="Elephant" class="elephant">
+                    <img src="assets/img/window/music/music.gif" alt="Violinist" class="violinist-left">
+                    <img src="assets/img/window/music/diablo.gif" alt="Diablo" class="diablo">
+                    <img src="assets/img/window/music/electspin.gif" alt="Electric guitar" class="electric-guitar">
+                </div>
+                
+                <!-- مشغل الموسيقى الجديد -->
+                <div class="music-player-container">
+                    <div class="player-header">
+                        <h3>Music Player</h3>
+                        <span class="pulsing">♪♫</span>
+                    </div>
+                    
+                    <div class="now-playing">
+                        <div class="song-title" id="currentSongTitle">You And Whose Army?</div>
+                        <div class="song-artist" id="currentSongArtist">Radiohead</div>
+                    </div>
+                    
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="control-btn" id="prevBtn">⏮</button>
+                        <button class="control-btn play-btn" id="playBtn">▶</button>
+                        <button class="control-btn" id="nextBtn">⏭</button>
+                    </div>
+                    
+                    <div class="volume-container">
+                        <button class="control-btn" id="volumeBtn">🔊</button>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.7">
+                    </div>
+                    
+                    <div class="playlist" id="playlist">
+                        <!-- سيتم ملء قائمة التشغيل بالجافاسكريبت -->
+                    </div>
+                </div>
+                
+                <div class="animated-cd">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                    <img src="assets/img/window/music/cd.gif" alt="CD" class="rotating">
+                </div>
+                
+                <div class="window-footer">
+                    <div class="content">
+                        <p>
+                            Karrar Nazim <span class="current-year"></span>&copy; |
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Music Window -->
+    
+    <!-- Videos Window -->
+    <div class="window videos-window hidden" id="videosWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/MY_PROJECTS</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger">
+                    <span>
+                        Music
+                    </span>
+                </button>
+                
+                <button data-trigger="videos-window" class="win-trigger current-window">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+                <button data-trigger="dino-game-window" class="win-trigger ">
+                    <span>
+                        Dino game
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <h2>
+                    My Projects
+                </h2>
+                <div class="social-container">
+                    <div class="social-header">
+                        Websites
+                    </div>
+                    <div class="social">
+                        <a href="https://schoolcard.netlify.app" target="_blank" rel="noopener">
+                            School Card Generator
+                            
+                        </a>
+                        <a href="https://animeslayer.rf.gd" target="_blank" rel="noopener">
+                            Manga Slayer app
+                            
+                        </a>
+                        <a href="https://titansstore.netlify.app" target="_blank" rel="noopener">
+                            Titan Store UI
+                        </a>
+                                                <a href="https://sandro00o.github.io/Hex-and-ASCII-Viewer/" target="_blank" rel="noopener">
+                            Enhanced Hex and ASCII Viewer
+                        </a>
+                                                <a href="https://sandro00o.github.io/Time-capsule/" target="_blank" rel="noopener">
+                            Time capsule
+                        </a>
+                        
+                    </div>
+                </div>
+                
+                <div class="window-footer">
+                    <div class="content">
+                        <p>
+                            Karrar Nazim <span class="current-year"></span>&copy; |
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screensaver Window -->
+    <div class="window screensaver-window hidden" id="screensaverWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/SCREENSAVER</h2>
+                </div>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <img src="assets/img/window/screensaver/image019.gif" alt="House icon" class="image019">
+                <img src="assets/img/window/screensaver/shop.gif" alt="Shop banner" class="shop">
+                <img src="assets/img/window/screensaver/cd.gif" alt="CD" class="cd">
+                <img src="assets/img/window/screensaver/sodaglobe.gif" alt="Dog in Globe" class="sodaglobe">
+                <img src="assets/img/window/screensaver/musiclargesidebanner.gif" alt="Create your own cd" class="musiclargesidebanner">
+                
+                <img src="assets/img/window/screensaver/animated-cd.gif" alt="Animated CD" class="animated-cd">
+                <img src="assets/img/window/screensaver/e-mail.gif" alt="E-mail" class="e-mail">
+                <img src="assets/img/window/screensaver/music-item13.gif" alt="E-mail" class="music-item13">
+                <img src="assets/img/window/screensaver/speakers.gif" alt="E-mail" class="speakers">
+                
+                <img src="assets/img/window/screensaver/music-mov.gif" alt="Music" class="music-mov-l">
+                <img src="assets/img/window/screensaver/cooltext416636731831278.gif" alt="Music" class="cooltext416636731831278">
+                <img src="assets/img/window/screensaver/music-mov.gif" alt="Music" class="music-mov-r">
+                <img src="assets/img/window/screensaver/musica4.gif" alt="Guitar" class="musica4">
+                
+                
+                
+                
+                <img src="assets/img/window/screensaver/boymusic3.gif" alt="Boy music" class="boymusic3">
+                <img src="assets/img/window/screensaver/cd6.gif" alt="CD" class="cd6">
+                <img src="assets/img/window/screensaver/cdspin.gif" alt="CD Spin" class="cdspin">
+                <img src="assets/img/window/screensaver/music9.gif" alt="Keyboard" class="music9">
+                <img src="assets/img/window/screensaver/dinocd.gif" alt="Dino" class="dinocd">
+                <img src="assets/img/window/screensaver/senses-listening.gif" alt="6 Senses Listen" class="senses-listening">
+                <img src="assets/img/window/screensaver/music02.gif" alt="Graph" class="music02">
+                
+                <img src="assets/img/window/screensaver/musicbanner.gif" alt="Free Music" class="musicbanner">
+                <img src="assets/img/window/screensaver/musicline19.gif" alt="Music notation" class="musicline19">
+                <img src="assets/img/window/screensaver/refbutton.gif" alt="Music banner" class="refbutton">
+                
+                
+                
+            </div>
+        </div>
+    </div>
+    <!-- End Screensaver Window -->
+    
+    <!-- Dino Game Window -->
+    <div class="window dino-game-window hidden" id="dinoGameWindow">
+        <header>
+            <div class="title-bar drag-handle">
+                <div class="title">
+                    <a href="" rel="noopener" class="btn btn-basic btn-search-icon" title="KARRAR NAZIM"></a>
+                    <h2>KARRARNAZIM/DINO_GAME</h2>
+                </div>
+                <button class="btn btn-toggle-mobile-menu">
+                    <span class="sr-only">
+                        Menu
+                    </span>
+                </button>
+                <span class="btn btn-close" title="Close">
+                    <a href="#">X</a>
+                </span>
+            </div>
+            <nav>
+                <button data-trigger="music-window" class="win-trigger">
+                    <span>
+                        Music
+                    </span>
+                </button>
+                
+                
+                <button data-trigger="videos-window" class="win-trigger">
+                    <span>
+                        My Projects
+                    </span>
+                </button>
+                
+                <button data-trigger="subscribe-window" class="win-trigger">
+                    <span>
+                        Who am I?
+                    </span>
+                </button>
+                <button data-trigger="dino-game-window" class="win-trigger current-window ">
+                    <span>
+                        Dino game
+                    </span>
+                </button>
+            </nav>
+        </header>
+        <div class="window-content">
+            <div class="window-content-area">
+                <div class="game-instructions">
+                    <p><strong>How to play:</strong> Press SPACE to jump, DOWN ARROW to duck</p>
+                    <p>Survive as long as you can!</p>
+                </div>
+                <iframe src="dino/index.html" frameborder="0"></iframe>
+                <div class="game-footer">
+                    <button id="restartDino" class="btn btn-basic">Restart Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="js/lib/drag.js?version=6"></script>
+    <script src="js/lib/moment.js"></script>
+    <script src="js/lib/moment-tz.js"></script>
+    <script src="js/scripts.js?version=11"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init({ publicKey: "22hFsgtwZz1baWIHr" });
+        
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const captchaResponse = grecaptcha.getResponse();
+            
+            if (!captchaResponse) {
+                document.getElementById("status-message").innerText = "Make sure to check reCAPTCHA.";
+                return;
+            }
+            
+            emailjs.sendForm("service_ensplx8", "template_p18srdw", this)
+                .then(() => {
+                    document.getElementById("status-message").innerText = "sent!, I will replay as soon as I can...";
+                    grecaptcha.reset(); // إعادة الكابتشا
+                    this.reset();
+                }, (error) => {
+                    document.getElementById("status-message").innerText = "somthing went wrong!" + error.text;
+                });
+        });
+    </script>
+    
+    <script>
+        var originalTitle = document.title;
+        
+        document.title = "Stepping into the unknown";
+        
+        var loadCompleted = false;
+        var loadTimestamp = 0;
+        
+        window.addEventListener("load", function() {
+            loadCompleted = true;
+            loadTimestamp = Date.now();
+            if (!document.hidden) {
+                document.title = "Well, now you’re here.";
+                setTimeout(function() {
+                    if (!document.hidden) {
+                        document.title = originalTitle;
+                    }
+                }, 1000);
+            }
+        });
+        
+        document.addEventListener("click", function(e) {
+            var anchor = e.target.closest("a");
+            if (anchor) {
+                var href = anchor.getAttribute("href");
+                if (href && !href.startsWith("http") && !href.startsWith("#")) {
+                    document.title = "Stepping into the unknown";
+                }
+            }
+        });
+        
+        window.addEventListener("beforeunload", function(e) {
+            document.title = "Stepping into the unknown";
+        });
+        
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "❓ Was it something I said?";
+            } else {
+                if (!loadCompleted) {
+                    document.title = "Stepping into the unknown";
+                } else {
+                    if (Date.now() - loadTimestamp >= 1000) {
+                        document.title = originalTitle;
+                    } else {
+                        document.title = "Well, now you’re here.";
+                    }
+                }
+            }
+        });
+        
+        const originalFavicon = document.querySelector("link[rel='icon']")?.getAttribute("href");
+        
+        function changeFavicon(src) {
+            let favicon = document.querySelector("link[rel*='icon']");
+            if (favicon) {
+                favicon.href = src;
+            } else {
+                favicon = document.createElement("link");
+                favicon.rel = "icon";
+                favicon.href = src;
+                document.head.appendChild(favicon);
+            }
+        }
+        
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                changeFavicon("https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/closed.png");
+            } else {
+                changeFavicon(originalFavicon || "https://cdn.jsdelivr.net/gh/SANDRO00O/hunter@main/fav.png");
+            }
+        });
+    </script>
+    <script>
+        // بيانات الأغاني
+        const songs = [
+        {
+            title: "You And Whose Army?",
+            artist: "Radiohead",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/You-And-Whose-Army.opus"
+        },
+        {
+            title: "The Kids from Yesterday",
+            artist: "My Chemical Romance",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/The-Kids-from-Yesterday.opus"
+        },
+        {
+            title: "Street Spirit (Fade Out)",
+            artist: "Radiohead",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Street-Spirit-Fade-Out.opus"
+        },
+        {
+            title: "Vampires Will Never Hurt You",
+            artist: "My Chemical Romance",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Vampires-Will-Never-Hurt-You.opus"
+        },
+        {
+            title: "Lift",
+            artist: "Radiohead",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Lift.opus"
+        },
+        {
+            title: "Early Sunsets Over Monroeville",
+            artist: "My Chemical Romance",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Early-Sunsets-Over-Monroeville.opus"
+        },
+        {
+            title: "Demolition Lovers",
+            artist: "My Chemical Romance",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Demolition-Lovers.opus"
+        },
+        {
+            title: "Dead!",
+            artist: "My Chemical Romance",
+            src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Dead.opus"
+        }];
+        
+        // عناصر DOM
+        const audio = new Audio();
+        audio.preload = "none";
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const playlistEl = document.getElementById('playlist');
+        const currentSongTitle = document.getElementById('currentSongTitle');
+        const currentSongArtist = document.getElementById('currentSongArtist');
+        
+        
+        // حالة المشغل
+        let isPlaying = false;
+        let currentSongIndex = 0;
+        
+        // تهيئة المشغل
+        function initPlayer() {
+            // إنشاء قائمة التشغيل
+            songs.forEach((song, index) => {
+                const songElement = document.createElement('div');
+                songElement.classList.add('playlist-item');
+                if (index === currentSongIndex) {
+                    songElement.classList.add('active');
+                }
+                songElement.innerHTML = `
+                    <strong>${song.title}</strong>
+                    <div>${song.artist}</div>
+                `;
+                songElement.dataset.index = index;
+                playlistEl.appendChild(songElement);
+                
+                songElement.addEventListener('click', () => {
+                    currentSongIndex = parseInt(songElement.dataset.index);
+                    loadSong(currentSongIndex);
+                    playSong();
+                    
+                    // تحديث العنصر النشط في القائمة
+                    document.querySelectorAll('.playlist-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    songElement.classList.add('active');
+                });
+            });
+            
+            // تحميل الأغنية الأولى
+            loadSong(currentSongIndex);
+            
+            // أحداث المشغل
+            playBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    pauseSong();
+                } else {
+                    playSong();
+                }
+            });
+            
+            prevBtn.addEventListener('click', playPrevSong);
+            nextBtn.addEventListener('click', playNextSong);
+            
+            volumeSlider.addEventListener('input', () => {
+                audio.volume = volumeSlider.value;
+                updateVolumeIcon();
+            });
+            
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('ended', playNextSong);
+            
+            progressContainer.addEventListener('click', setProgress);
+            
+            // تحديث أيقونة الصوت بناءً على القيمة الابتدائية
+            updateVolumeIcon();
+        }
+        
+        // تحميل أغنية
+        function loadSong(index) {
+            const song = songs[index];
+            audio.src = song.src;
+            currentSongTitle.textContent = song.title;
+            currentSongArtist.textContent = song.artist;
+        }
+        
+        // تشغيل الأغنية
+        function playSong() {
+            isPlaying = true;
+            audio.play();
+            playBtn.textContent = '⏸';
+            document.querySelector('.rotating').style.animationPlayState = 'running';
+        }
+        
+        // إيقاف الأغنية
+        function pauseSong() {
+            isPlaying = false;
+            audio.pause();
+            playBtn.textContent = '▶';
+            document.querySelector('.rotating').style.animationPlayState = 'paused';
+        }
+        
+        // الأغنية السابقة
+        function playPrevSong() {
+            currentSongIndex--;
+            if (currentSongIndex < 0) {
+                currentSongIndex = songs.length - 1;
+            }
+            loadSong(currentSongIndex);
+            playSong();
+            updateActivePlaylistItem();
+        }
+        
+        // الأغنية التالية
+        function playNextSong() {
+            currentSongIndex++;
+            if (currentSongIndex > songs.length - 1) {
+                currentSongIndex = 0;
+            }
+            loadSong(currentSongIndex);
+            playSong();
+            updateActivePlaylistItem();
+        }
+        
+        // تحديث شريط التقدم
+        function updateProgress(e) {
+            const { duration, currentTime } = e.srcElement;
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            // تحديث الوقت الحالي
+            currentTimeEl.textContent = formatTime(currentTime);
+            
+            // تحديث المدة الكلية
+            if (!isNaN(duration)) {
+                durationEl.textContent = formatTime(duration);
+            }
+        }
+        
+        // تحديد التقدم بالنقر على شريط التقدم
+        function setProgress(e) {
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            
+            audio.currentTime = (clickX / width) * duration;
+        }
+        
+        // تحديث أيقونة الصوت
+        function updateVolumeIcon() {
+            const volume = audio.volume;
+            
+            if (volume === 0) {
+                volumeBtn.textContent = '🔇';
+            } else if (volume < 0.3) {
+                volumeBtn.textContent = '🔈';
+            } else {
+                volumeBtn.textContent = '🔊';
+            }
+        }
+        
+        // تحديث العنصر النشط في قائمة التشغيل
+        function updateActivePlaylistItem() {
+            document.querySelectorAll('.playlist-item').forEach((item, index) => {
+                if (index === currentSongIndex) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
+        // تنسيق الوقت (تحويل الثواني إلى دقائق:ثواني)
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            seconds = Math.floor(seconds % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+        
+        // تهيئة المشغل عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', initPlayer);
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // إعادة تحميل لعبة الدينو
+            const restartBtn = document.getElementById('restartDino');
+            if (restartBtn) {
+                restartBtn.addEventListener('click', function() {
+                    const iframe = document.querySelector('.dino-game-window iframe');
+                    if (iframe) iframe.src = iframe.src;
+                });
+            }
+            
+            // إعادة ضبط حجم الإطار عند فتح النافذة
+            $(document).on('click', '[data-trigger="dino-game-window"]', function() {
+                setTimeout(function() {
+                    const iframe = document.querySelector('.dino-game-window iframe');
+                    if (iframe) iframe.style.height = (window.innerHeight * 0.5) + 'px';
+                }, 100);
+            });
+            
+            // ضبط حجم الإطار عند تغيير حجم النافذة
+            window.addEventListener('resize', function() {
+                const dinoWindow = document.querySelector('.dino-game-window');
+                const iframe = document.querySelector('.dino-game-window iframe');
+                if (dinoWindow && iframe && !dinoWindow.classList.contains('hidden')) {
+                    iframe.style.height = (window.innerHeight * 0.5) + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
