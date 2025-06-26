@@ -915,9 +915,39 @@
             }
         });
     </script>
+
     <script>
-        // بيانات الأغاني
-        const songs = [
+        document.addEventListener('DOMContentLoaded', function() {
+            // إعادة تحميل لعبة الدينو
+            const restartBtn = document.getElementById('restartDino');
+            if (restartBtn) {
+                restartBtn.addEventListener('click', function() {
+                    const iframe = document.querySelector('.dino-game-window iframe');
+                    if (iframe) iframe.src = iframe.src;
+                });
+            }
+            
+            // إعادة ضبط حجم الإطار عند فتح النافذة
+            $(document).on('click', '[data-trigger="dino-game-window"]', function() {
+                setTimeout(function() {
+                    const iframe = document.querySelector('.dino-game-window iframe');
+                    if (iframe) iframe.style.height = (window.innerHeight * 0.5) + 'px';
+                }, 100);
+            });
+            
+            // ضبط حجم الإطار عند تغيير حجم النافذة
+            window.addEventListener('resize', function() {
+                const dinoWindow = document.querySelector('.dino-game-window');
+                const iframe = document.querySelector('.dino-game-window iframe');
+                if (dinoWindow && iframe && !dinoWindow.classList.contains('hidden')) {
+                    iframe.style.height = (window.innerHeight * 0.5) + 'px';
+                }
+            });
+        });
+    </script>
+<script>
+    // بيانات الأغاني
+    const songs = [
         {
             title: "You And Whose Army?",
             artist: "Radiohead",
@@ -957,220 +987,202 @@
             title: "Dead!",
             artist: "My Chemical Romance",
             src: "https://cdn.jsdelivr.net/gh/SANDRO00O/karrarnazim@main/assets/music/Dead.opus"
-        }];
-        
-        // عناصر DOM
-        const audio = new Audio();
-        audio.preload = "none";
-        const playBtn = document.getElementById('playBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const volumeBtn = document.getElementById('volumeBtn');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const progressContainer = document.getElementById('progressContainer');
-        const progressBar = document.getElementById('progressBar');
-        const currentTimeEl = document.getElementById('currentTime');
-        const durationEl = document.getElementById('duration');
-        const playlistEl = document.getElementById('playlist');
-        const currentSongTitle = document.getElementById('currentSongTitle');
-        const currentSongArtist = document.getElementById('currentSongArtist');
-        
-        
-        // حالة المشغل
-        let isPlaying = false;
-        let currentSongIndex = 0;
-        
-        // تهيئة المشغل
-        function initPlayer() {
-            // إنشاء قائمة التشغيل
-            songs.forEach((song, index) => {
-                const songElement = document.createElement('div');
-                songElement.classList.add('playlist-item');
-                if (index === currentSongIndex) {
-                    songElement.classList.add('active');
-                }
-                songElement.innerHTML = `
-                    <strong>${song.title}</strong>
-                    <div>${song.artist}</div>
-                `;
-                songElement.dataset.index = index;
-                playlistEl.appendChild(songElement);
-                
-                songElement.addEventListener('click', () => {
-                    currentSongIndex = parseInt(songElement.dataset.index);
-                    loadSong(currentSongIndex);
-                    playSong();
-                    
-                    // تحديث العنصر النشط في القائمة
-                    document.querySelectorAll('.playlist-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    songElement.classList.add('active');
-                });
-            });
-            
-            // تحميل الأغنية الأولى
-            loadSong(currentSongIndex);
-            
-            // أحداث المشغل
-            playBtn.addEventListener('click', () => {
-                if (isPlaying) {
-                    pauseSong();
-                } else {
-                    playSong();
-                }
-            });
-            
-            prevBtn.addEventListener('click', playPrevSong);
-            nextBtn.addEventListener('click', playNextSong);
-            
-            volumeSlider.addEventListener('input', () => {
-                audio.volume = volumeSlider.value;
-                updateVolumeIcon();
-            });
-            
-            audio.addEventListener('timeupdate', updateProgress);
-            audio.addEventListener('ended', playNextSong);
-            
-            progressContainer.addEventListener('click', setProgress);
-            
-            // تحديث أيقونة الصوت بناءً على القيمة الابتدائية
-            updateVolumeIcon();
         }
-        
-        // تحميل أغنية
-        function loadSong(index) {
-            const song = songs[index];
-            audio.src = song.src;
-            currentSongTitle.textContent = song.title;
-            currentSongArtist.textContent = song.artist;
-        }
-        
-        // تشغيل الأغنية
-        function playSong() {
-            isPlaying = true;
-            audio.play();
-            playBtn.textContent = '⏸';
-            document.querySelector('.rotating').style.animationPlayState = 'running';
-        }
-        
-        // إيقاف الأغنية
-        function pauseSong() {
-            isPlaying = false;
-            audio.pause();
-            playBtn.textContent = '▶';
-            document.querySelector('.rotating').style.animationPlayState = 'paused';
-        }
-        
-        // الأغنية السابقة
-        function playPrevSong() {
-            currentSongIndex--;
-            if (currentSongIndex < 0) {
-                currentSongIndex = songs.length - 1;
+    ];
+
+    // عناصر DOM
+    const audio = new Audio();
+    audio.preload = "none";
+    const playBtn = document.getElementById('playBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const volumeBtn = document.getElementById('volumeBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    const playlistEl = document.getElementById('playlist');
+    const currentSongTitle = document.getElementById('currentSongTitle');
+    const currentSongArtist = document.getElementById('currentSongArtist');
+
+    // حالة المشغل
+    let isPlaying = false;
+    let currentSongIndex = 0;
+
+    // تهيئة المشغل
+    function initPlayer() {
+        // إنشاء قائمة التشغيل
+        songs.forEach((song, index) => {
+            const songElement = document.createElement('div');
+            songElement.classList.add('playlist-item');
+            if (index === currentSongIndex) {
+                songElement.classList.add('active');
             }
-            loadSong(currentSongIndex);
-            playSong();
-            updateActivePlaylistItem();
-        }
-        
-        // الأغنية التالية
-        function playNextSong() {
-            currentSongIndex++;
-            if (currentSongIndex > songs.length - 1) {
-                currentSongIndex = 0;
-            }
-            loadSong(currentSongIndex);
-            playSong();
-            updateActivePlaylistItem();
-        }
-        
-        // تحديث شريط التقدم
-        function updateProgress(e) {
-            const { duration, currentTime } = e.srcElement;
-            const progressPercent = (currentTime / duration) * 100;
-            progressBar.style.width = `${progressPercent}%`;
-            
-            // تحديث الوقت الحالي
-            currentTimeEl.textContent = formatTime(currentTime);
-            
-            // تحديث المدة الكلية
-            if (!isNaN(duration)) {
-                durationEl.textContent = formatTime(duration);
-            }
-        }
-        
-        // تحديد التقدم بالنقر على شريط التقدم
-        function setProgress(e) {
-            const width = this.clientWidth;
-            const clickX = e.offsetX;
-            const duration = audio.duration;
-            
-            audio.currentTime = (clickX / width) * duration;
-        }
-        
-        // تحديث أيقونة الصوت
-        function updateVolumeIcon() {
-            const volume = audio.volume;
-            
-            if (volume === 0) {
-                volumeBtn.textContent = '🔇';
-            } else if (volume < 0.3) {
-                volumeBtn.textContent = '🔈';
-            } else {
-                volumeBtn.textContent = '🔊';
-            }
-        }
-        
-        // تحديث العنصر النشط في قائمة التشغيل
-        function updateActivePlaylistItem() {
-            document.querySelectorAll('.playlist-item').forEach((item, index) => {
-                if (index === currentSongIndex) {
-                    item.classList.add('active');
-                } else {
+            songElement.innerHTML = `
+                <strong>${song.title}</strong>
+                <div>${song.artist}</div>
+            `;
+            songElement.dataset.index = index;
+            playlistEl.appendChild(songElement);
+
+            songElement.addEventListener('click', () => {
+                currentSongIndex = parseInt(songElement.dataset.index);
+                loadSong(currentSongIndex);
+                playSong();
+
+                // تحديث العنصر النشط في القائمة
+                document.querySelectorAll('.playlist-item').forEach(item => {
                     item.classList.remove('active');
-                }
-            });
-        }
-        
-        // تنسيق الوقت (تحويل الثواني إلى دقائق:ثواني)
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            seconds = Math.floor(seconds % 60);
-            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-        
-        // تهيئة المشغل عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', initPlayer);
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // إعادة تحميل لعبة الدينو
-            const restartBtn = document.getElementById('restartDino');
-            if (restartBtn) {
-                restartBtn.addEventListener('click', function() {
-                    const iframe = document.querySelector('.dino-game-window iframe');
-                    if (iframe) iframe.src = iframe.src;
                 });
-            }
-            
-            // إعادة ضبط حجم الإطار عند فتح النافذة
-            $(document).on('click', '[data-trigger="dino-game-window"]', function() {
-                setTimeout(function() {
-                    const iframe = document.querySelector('.dino-game-window iframe');
-                    if (iframe) iframe.style.height = (window.innerHeight * 0.5) + 'px';
-                }, 100);
-            });
-            
-            // ضبط حجم الإطار عند تغيير حجم النافذة
-            window.addEventListener('resize', function() {
-                const dinoWindow = document.querySelector('.dino-game-window');
-                const iframe = document.querySelector('.dino-game-window iframe');
-                if (dinoWindow && iframe && !dinoWindow.classList.contains('hidden')) {
-                    iframe.style.height = (window.innerHeight * 0.5) + 'px';
-                }
+                songElement.classList.add('active');
             });
         });
-    </script>
+
+        // تحميل الأغنية الأولى
+        loadSong(currentSongIndex);
+
+        // أحداث المشغل
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                pauseSong();
+            } else {
+                playSong();
+            }
+        });
+
+        prevBtn.addEventListener('click', playPrevSong);
+        nextBtn.addEventListener('click', playNextSong);
+
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
+            updateVolumeIcon();
+        });
+
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('ended', playNextSong);
+
+        progressContainer.addEventListener('click', setProgress);
+
+        // تحديث أيقونة الصوت بناءً على القيمة الابتدائية
+        updateVolumeIcon();
+    }
+
+    // تحميل أغنية
+    function loadSong(index) {
+        const song = songs[index];
+        audio.src = song.src;
+        currentSongTitle.textContent = song.title;
+        currentSongArtist.textContent = song.artist;
+    }
+
+    // تشغيل الأغنية
+    function playSong() {
+        isPlaying = true;
+        audio.play();
+        playBtn.textContent = '⏸';
+        document.querySelector('.rotating').style.animationPlayState = 'running';
+    }
+
+    // إيقاف الأغنية
+    function pauseSong() {
+        isPlaying = false;
+        audio.pause();
+        playBtn.textContent = '▶';
+        document.querySelector('.rotating').style.animationPlayState = 'paused';
+    }
+
+    // الأغنية السابقة
+    function playPrevSong() {
+        currentSongIndex--;
+        if (currentSongIndex < 0) {
+            currentSongIndex = songs.length - 1;
+        }
+        loadSong(currentSongIndex);
+        playSong();
+        updateActivePlaylistItem();
+    }
+
+    // الأغنية التالية
+    function playNextSong() {
+        currentSongIndex++;
+        if (currentSongIndex > songs.length - 1) {
+            currentSongIndex = 0;
+        }
+        loadSong(currentSongIndex);
+        playSong();
+        updateActivePlaylistItem();
+    }
+
+    // تحديث شريط التقدم
+    function updateProgress(e) {
+        const { duration, currentTime } = e.srcElement;
+        const progressPercent = (currentTime / duration) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+
+        // تحديث الوقت الحالي
+        currentTimeEl.textContent = formatTime(currentTime);
+
+        // تحديث المدة الكلية
+        if (!isNaN(duration)) {
+            durationEl.textContent = formatTime(duration);
+        }
+    }
+
+    // تحديد التقدم بالنقر على شريط التقدم
+    function setProgress(e) {
+        const width = this.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audio.duration;
+
+        audio.currentTime = (clickX / width) * duration;
+    }
+
+    // تحديث أيقونة الصوت
+    function updateVolumeIcon() {
+        const volume = audio.volume;
+
+        if (volume === 0) {
+            volumeBtn.textContent = '🔇';
+        } else if (volume < 0.3) {
+            volumeBtn.textContent = '🔈';
+        } else {
+            volumeBtn.textContent = '🔊';
+        }
+    }
+
+    // تحديث العنصر النشط في قائمة التشغيل
+    function updateActivePlaylistItem() {
+        document.querySelectorAll('.playlist-item').forEach((item, index) => {
+            if (index === currentSongIndex) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    // تنسيق الوقت (تحويل الثواني إلى دقائق:ثواني)
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        seconds = Math.floor(seconds % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    // تهيئة المشغل عند تحميل المحتوى الأساسي
+    document.addEventListener('DOMContentLoaded', initPlayer);
+
+    // تحميل الأغاني في الخلفية بعد انتهاء تحميل الصفحة بالكامل
+    window.addEventListener('load', () => {
+        songs.forEach(song => {
+            const hiddenAudio = new Audio();
+            hiddenAudio.src = song.src;
+            hiddenAudio.preload = 'auto';  // يبدأ التحميل فوراً
+            hiddenAudio.muted = true;      // لا يصدر صوت نهائياً
+            // لا حاجة لإضافته إلى DOM
+        });
+    });
+</script>
 </body>
 
 </html>
