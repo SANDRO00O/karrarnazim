@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" >
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تقوس حقيقي للموقع مع تأثير CRT</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .curved-screen {
+    position: relative;
+    width: 90vw;
+    max-width: 1200px;
+    height: 80vh;
+    background: #0a0a0a;
+    border-radius: 60px / 40px;
+    overflow: hidden;
+    box-shadow:
+      0 0 50px #00ff99aa,
+      inset 0 0 30px #00ff9955;
+    perspective: 1500px;
+  }
+
+  .curved-screen .content {
+    height: 100%;
+    padding: 2rem 3rem;
+    color: #00ff99;
+    text-shadow:
+      0 0 5px #00ff99,
+      0 0 10px #00ff99;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    overflow-y: auto;
+
+    /* تأثير التقوس ثلاثي الأبعاد */
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    transform:
+      rotateX(6deg)
+      rotateY(2deg)
+      translateZ(0);
+
+    /* انحناء بصري للمحتوى */
+    clip-path: ellipse(100% 100% at 50% 50%);
+  }
+
+  /* طبقة خطوط CRT المتحركة */
+  .curved-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 60px / 40px;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, rgba(0,255,153,0.1) 0%, transparent 70%),
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 153, 0.05),
+        rgba(0, 255, 153, 0.05) 1px,
+        transparent 2px,
+        transparent 3px
+      );
+    mix-blend-mode: screen;
+    animation: scanlineMove 8s linear infinite;
+    z-index: 10;
+  }
+
+  /* تأثير الظلال الداكنة على الحواف */
+  .curved-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 60px / 40px;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0,0,0,0) 50%,
+      rgba(0,0,0,0.6) 90%
+    );
+    z-index: 11;
+  }
+
+  @keyframes scanlineMove {
+    0% {
+      background-position: 0 0, 0 0;
+    }
+    100% {
+      background-position: 0 100%, 0 100%;
+    }
+  }
+
+  /* شريط تمرير scrollbar جميل */
+  .curved-screen .content::-webkit-scrollbar {
+    width: 8px;
+  }
+  .curved-screen .content::-webkit-scrollbar-thumb {
+    background: #00ff99aa;
+    border-radius: 4px;
+  }
+  .curved-screen .content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+</style>
+</head>
+<body>
+  <div class="curved-screen">
+    <div class="content">
+      <h1>تقوس حقيقي ممتد مع المحتوى</h1>
+      <p>هذا تأثير يطبق انحناء على حواف الموقع والمحتوى يتحرك بانحناء خفيف ثلاثي الأبعاد، مع تأثير CRT خفيف.</p>
+      <p>جرب تمرير المحتوى لترى التأثير وهو متوافق مع تقوس الحواف، العناصر لا تخرج من الإطار.</p>
+      <p>يمكنك إضافة نصوص، صور، وأي محتوى وسيظل ملتفاً مع الانحناء.</p>
+      <p>التقنية تعتمد على perspective مع دوران خفيف 3D للعنصر المحتوى.</p>
+      <p>هذا يعطي إحساس بتقوس الشاشة مع الحفاظ على قابلية القراءة.</p>
+    </div>
+  </div>
+</body>
+</html>
